@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace NaughtyCharacter
-{
-    [RequireComponent(typeof(Text))]
+[RequireComponent(typeof(Text))]
     public class FpsCounter : MonoBehaviour
     {
         private float _fpsMeasurePeriod;
@@ -49,4 +47,4 @@ namespace NaughtyCharacter
             }
         }
     }
-}
+

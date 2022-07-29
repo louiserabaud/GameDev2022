@@ -1,8 +1,6 @@
 using UnityEngine;
 
-namespace NaughtyCharacter
-{
-    [CreateAssetMenu(fileName = "PlayerController", menuName = "NaughtyCharacter/PlayerController")]
+[CreateAssetMenu(fileName = "PlayerController", menuName = "NaughtyCharacter/PlayerController")]
     public class PlayerController : Controller
     {
         public float ControlRotationSensitivity = 1.0f;
@@ -12,6 +10,7 @@ namespace NaughtyCharacter
 
         public override void Init()
         {
+            Debug.Log("INIT CLASS TEST");
             _playerInput = FindObjectOfType<PlayerInputComponent>();
             _playerCamera = FindObjectOfType<PlayerCamera>();
         }
@@ -20,7 +19,7 @@ namespace NaughtyCharacter
         {
             UpdateControlRotation();
             Character.SetMovementInput(GetMovementInput());
-            Character.SetJumpInput(_playerInput.JumpInput);
+            //Character.SetJumpInput(_playerInput.JumpInput);
         }
 
         public override void OnCharacterFixedUpdate()
@@ -62,4 +61,3 @@ namespace NaughtyCharacter
             return movementInput;
         }
     }
-}

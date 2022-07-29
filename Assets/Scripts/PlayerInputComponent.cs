@@ -1,9 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace NaughtyCharacter
-{
-    public class PlayerInputComponent : MonoBehaviour
+   public class PlayerInputComponent : MonoBehaviour
     {
         public Vector2 MoveInput { get; private set; }
         public Vector2 LastMoveInput { get; private set; }
@@ -42,4 +40,4 @@ namespace NaughtyCharacter
             }
         }
     }
-}
+

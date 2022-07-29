@@ -340,23 +340,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6183048251904429594, guid: a82f70a5f0178974093910fc6fd84c38, type: 3}
   m_PrefabInstance: {fileID: 98926297}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2089110259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2089110258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c13ee35010795cc40a47bd37c09f0215, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RotationSpeed: 0
-  PositionSmoothDamp: 0
-  Rig: {fileID: 0}
-  Pivot: {fileID: 0}
-  Camera: {fileID: 0}
 --- !u!54 &2089110260
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -373,7 +356,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2089110261
+--- !u!114 &2089110263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -382,11 +365,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 2089110258}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c13ee35010795cc40a47bd37c09f0215, type: 3}
+  m_Script: {fileID: 11500000, guid: 42948da0c996a1f429b0906415869b25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 0
-  PositionSmoothDamp: 0
-  Rig: {fileID: 0}
-  Pivot: {fileID: 0}
-  Camera: {fileID: 0}
+--- !u!114 &2089110264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089110258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19895b2297432194286737f0a8f1042d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Controller: {fileID: 0}
+  MovementSettings:
+    Acceleration: 25
+    Decceleration: 25
+    MaxHorizontalSpeed: 8
+    JumpSpeed: 10
+    JumpAbortSpeed: 10
+  GravitySettings:
+    Gravity: 20
+    GroundedGravity: 5
+    MaxFallSpeed: 40
+  RotationSettings:
+    MinPitchAngle: -45
+    MaxPitchAngle: 75
+    RotationBehavior: 0
+    MinRotationSpeed: 600
+    MaxRotationSpeed: 1200
+  GroundSettings:
+    GroundLayers:
+      serializedVersion: 2
+      m_Bits: 0
+    SphereCastRadius: 0.35
+    SphereCastDistance: 0.15

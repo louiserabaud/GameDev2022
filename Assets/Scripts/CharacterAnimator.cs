@@ -1,8 +1,6 @@
 using UnityEngine;
 
-namespace NaughtyCharacter
-{
-    public static class CharacterAnimatorParamId
+public static class CharacterAnimatorParamId
     {
         public static readonly int HorizontalSpeed = Animator.StringToHash("HorizontalSpeed");
         public static readonly int VerticalSpeed = Animator.StringToHash("VerticalSpeed");
@@ -32,4 +30,4 @@ namespace NaughtyCharacter
             _animator.SetBool(CharacterAnimatorParamId.IsGrounded, _character.IsGrounded);
         }
     }
-}
+

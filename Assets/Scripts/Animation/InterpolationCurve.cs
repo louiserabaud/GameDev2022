@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NaughtyCharacter
-{
-    [CreateAssetMenu(fileName = "InterpolationCurve", menuName = "NaughtyCharacter/InterpolationCurve")]
+[CreateAssetMenu(fileName = "InterpolationCurve", menuName = "NaughtyCharacter/InterpolationCurve")]
     public class InterpolationCurve : ScriptableObject
     {
         public AnimationCurve Curve;
@@ -32,4 +30,4 @@ namespace NaughtyCharacter
             return from + (to - from) * Evaluate(time);
         }
     }
-}
+

@@ -1,8 +1,6 @@
 using UnityEngine;
 
-namespace NaughtyCharacter
-{
-    public enum ERotationBehavior
+  public enum ERotationBehavior
     {
         OrientRotationToMovement,
         UseControlRotation
@@ -56,7 +54,6 @@ namespace NaughtyCharacter
         public GroundSettings GroundSettings;
 
         private CharacterController _characterController; // The Unity's CharacterController
-        private CharacterAnimator _characterAnimator;
 
         private float _targetHorizontalSpeed; // In meters/second
         private float _horizontalSpeed; // In meters/second
@@ -80,7 +77,6 @@ namespace NaughtyCharacter
             Controller.Character = this;
 
             _characterController = GetComponent<CharacterController>();
-            _characterAnimator = GetComponent<CharacterAnimator>();
         }
 
         private void Update()
@@ -106,7 +102,6 @@ namespace NaughtyCharacter
 
             UpdateGrounded();
 
-            _characterAnimator.UpdateState();
         }
 
         public void SetMovementInput(Vector3 movementInput)
@@ -122,11 +117,7 @@ namespace NaughtyCharacter
             _hasMovementInput = hasMovementInput;
         }
 
-        public void SetJumpInput(bool jumpInput)
-        {
-            _jumpInput = jumpInput;
-        }
-
+       
         public Vector2 GetControlRotation()
         {
             return _controlRotation;
@@ -160,10 +151,7 @@ namespace NaughtyCharacter
             _justWalkedOffALedge = false;
 
             bool isGrounded = CheckGrounded();
-            if (IsGrounded && !isGrounded && !_jumpInput)
-            {
-                _justWalkedOffALedge = true;
-            }
+            
 
             IsGrounded = isGrounded;
         }
@@ -188,10 +176,7 @@ namespace NaughtyCharacter
             {
                 _verticalSpeed = -GravitySettings.GroundedGravity;
 
-                if (_jumpInput)
-                {
-                    _verticalSpeed = MovementSettings.JumpSpeed;
-                }
+                
             }
             else
             {
@@ -237,4 +222,4 @@ namespace NaughtyCharacter
             }
         }
     }
-}
+

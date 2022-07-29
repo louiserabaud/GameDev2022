@@ -1,8 +1,6 @@
 using UnityEngine;
 
-namespace NaughtyCharacter
-{
-    public class PlayerCamera : MonoBehaviour
+public class PlayerCamera : MonoBehaviour
     {
         [Tooltip("How fast the camera rotates around the pivot. Value <= 0 are interpreted as instant rotation")]
         public float RotationSpeed = 0.0f;
@@ -38,4 +36,4 @@ namespace NaughtyCharacter
             }
         }
     }
-}
+

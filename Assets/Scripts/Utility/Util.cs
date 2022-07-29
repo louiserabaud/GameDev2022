@@ -1,8 +1,6 @@
 using UnityEngine;
 
-namespace NaughtyCharacter
-{
-    public static class Util
+public static class Util
     {
         public static Vector3 SetX(this Vector3 vec, float x)
         {
@@ -44,4 +42,4 @@ namespace NaughtyCharacter
             return Mathf.LerpUnclamped(toMin, toMax, t);
         }
     }
-}
+

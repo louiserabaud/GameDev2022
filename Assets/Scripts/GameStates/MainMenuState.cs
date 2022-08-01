@@ -7,6 +7,7 @@ public class MainMenuState : MonoBehaviour {
 	void Awake () {
 		GM = GameManager.Instance;
 		GM.OnStateChange += HandleOnStateChange;
+        OnGUI();
 	}
 
 	public void HandleOnStateChange ()

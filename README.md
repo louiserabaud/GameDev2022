@@ -10,8 +10,10 @@ NOTE: Task name should clearly describe what the objective of the task is. Date 
 ## Tasks:
 - [X] Wireframe. (29/7/2022)
 - [X] Get the third camera person working. (Week 3)
+- [X] Documentatin for Game Outline document. (Week 3)
 - [ ] Add the roads. (Week 3)
 - [ ] Add Traffic Lights (Week 3)
 - [ ] Add the speedometer (Week 3)
+- [ ] Work together on competitor's states (Week 3)
 - [ ] Set up the UI elements. (Week 4)
 - [ ] DOCUMENTATION ()

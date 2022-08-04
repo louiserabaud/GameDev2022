@@ -54,11 +54,15 @@ public class GameManager : MonoBehaviour
     {
         if (m_SceneLoaded == false)
         {
+           
             SceneManager.LoadSceneAsync("Game", LoadSceneMode.Additive);
-           // SceneManager.UnloadSceneAsync("Core", LoadSceneMode.Additive);
             m_SceneLoaded = true;
-            //_Camera = Resources.Load("ThirdPersonCamera", typeof(Camera)) as Camera;
-             _Camera.gameObject.AddComponent<CameraController>();
+
+            _Camera.gameObject.AddComponent<CameraController>();
+            _Camera.gameObject.GetComponent<CameraController>().enabled = true;
+            _Camera.gameObject.transform.position = GetComponent<CameraController>().target.position;
+
+         
         }
     }
 

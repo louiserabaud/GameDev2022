@@ -5,13 +5,28 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Vector3 offset;
-    [SerializeField] private Transform target;
+    [SerializeField] private GameObject player;
+    public Transform target;
     [SerializeField] private float translateSpeed;
     [SerializeField] private float rotationSpeed;
 
+
     
     private void Awake(){
-        target = GameObject.Find("Player").transform;
+        //target = GameObject.Find("Player").transform;
+        player = (GameObject)  Instantiate(Resources.Load("Player"));
+        target = player.transform;
+        translateSpeed = 10;
+        rotationSpeed=12;
+        offset.x = 0;
+        offset.y = 2;
+        offset.z = -5;
+  
+    
+    }
+
+    private void Start(){
+        //target = GameObject.Find("Player").transform;
     }
 
     private void FixedUpdate()

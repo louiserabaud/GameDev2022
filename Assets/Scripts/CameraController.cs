@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float translateSpeed;
     [SerializeField] private float rotationSpeed;
 
+    
     private void Awake(){
         target = GameObject.Find("Player").transform;
     }

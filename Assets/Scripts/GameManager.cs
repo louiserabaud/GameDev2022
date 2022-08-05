@@ -1,29 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System.Collections;
 using UnityEngine.UI;
+using System;
+using UnityEngine.SceneManagement;
 
-
-public enum GameState{
-    Menu,
-    Play
-}
+public enum GameState
+    {
+        Menu = 0 ,
+        Play = 1
+    }
+ 
 
 public class GameManager : MonoBehaviour
 {
+    private GameStateFactory _gameStateFactory;
+    private GameState _currentGameState;
+
     public static GameManager Instance { get; private set; }
-
-    bool m_SceneLoaded;
-    public Button m_LoadSceneButton, m_SetActiveButton;
-
-
-    /// FLAGS
-    public bool isGameInitiated;
-    public bool isGameOver;
-
-    [SerializeField] Camera  _Camera;
-
 
     private void Awake() 
     { 
@@ -34,47 +27,33 @@ public class GameManager : MonoBehaviour
         else 
         { 
             Instance = this; 
-        }
+        }    
+        GameStateEntity.SwitchState += SwitchGameState;
+    }
 
-        if (m_LoadSceneButton != null)
-        {
-            Button loadButton = m_LoadSceneButton.GetComponent<Button>();
-            loadButton.onClick.AddListener(LoadSceneButton);
-        }
+    private void Start(){
+        SwitchGameState(GameState.Menu);
+    }
 
-        if (m_SetActiveButton != null)
-        {
-            Button buttonTwo = m_SetActiveButton.GetComponent<Button>();
-            buttonTwo.onClick.AddListener(SetActiveSceneButton);
+    private void SwitchGameState(GameState newState){
+        GameStateFactory.LoadState(newState);
+        _currentGameState = newState;
+        if (!IsSceneLoaded()){
+            StartCoroutine(LoadNewScene());
         }
     }
 
-    // Load the Scene when this Button is pressed
-    void LoadSceneButton()
-    {
-        if (m_SceneLoaded == false)
-        {
-           
-            SceneManager.LoadSceneAsync("Game", LoadSceneMode.Additive);
-            m_SceneLoaded = true;
-
-            _Camera.gameObject.AddComponent<CameraController>();
-            _Camera.gameObject.GetComponent<CameraController>().enabled = true;
-            _Camera.gameObject.transform.position = GetComponent<CameraController>().target.position;
-
-         
-        }
+    private bool IsSceneLoaded(){
+        return (SceneManager.GetActiveScene().buildIndex == (int)_currentGameState);
     }
 
-    void SetActiveSceneButton()
-    {
-        if (m_SceneLoaded == true)
-        {
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName("Game"));
-
-            Debug.Log("Active Scene : " + SceneManager.GetActiveScene().name);
-        }
+    IEnumerator LoadNewScene(){
+        var currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene((int)_currentGameState, LoadSceneMode.Additive);
+        yield return null;
+        SceneManager.UnloadSceneAsync(currentSceneIndex);
     }
+
+
+    
 }
-
-

@@ -5,19 +5,20 @@ using TMPro;
 
 public class PlayerInfoDisplay : MonoBehaviour
 {
-    public Transform playerPosition;
     public TMP_Text penalties;
-    [SerializeField] GameObject player;
-    PlayerController _PlayerController;
-
+    private int penalties_score = 0;
 
     void Awake(){
-        playerPosition = GameObject.Find("Player").transform;
-        _PlayerController = player.GetComponent<PlayerController>();
-      
+       // player = CameraController.GetPlayerObject();
+       // _PlayerController = player.GetComponent<PlayerController>();
+       TrafficLightController.CrossedRedLight+=UpdatePenalties;
     }
 
     void Update(){
-        penalties.text = "Penalties: " + _PlayerController.penalties.ToString();
+       penalties.text = "Penalties: " + penalties_score.ToString();
+    }
+
+    void UpdatePenalties(){
+        penalties_score+=1;
     }
 }

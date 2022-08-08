@@ -12,6 +12,7 @@ using UnityEngine;
             Instance = this;
         }
         public override void OnEnter(){
+            
         }
  
      

@@ -10,6 +10,7 @@
 /[Ll]ogs/
 /[Aa]ssets/[Rr]esources/
 /Assets/Resources
+/[Aa]ssets/[Rr]esources*
 /[Mm]emoryCaptures/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored

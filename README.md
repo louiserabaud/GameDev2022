@@ -5,6 +5,9 @@
 
 Please intall the following Third parties in your project folder and move them into a subdirectory named "Resources" OR "ExternalAssets"
 
+![alt text](https://github.com/louiserabaud/GameDev2022/blob/main/documentation/Readme_img/assets.png?raw=true)
+
+
  - [Sky Box](https://assetstore.unity.com/packages/2d/textures-materials/sky/fantasy-skybox-free-18353)
  - [Barmetler | road system](https://assetstore.unity.com/packages/tools/level-design/road-system-192818)
  - [DEBUG | CubexCube](https://assetstore.unity.com/packages/3d/environments/urban/cubexcube-free-city-pack-i-199815)

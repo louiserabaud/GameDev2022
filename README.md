@@ -1,7 +1,14 @@
+
+
+
 ## Third Party Assets 
+
+Please intall the following Third parties in your project folder and move them into a subdirectory named "resources" OR "ExternalAssets"
 
  - [Sky Box](https://assetstore.unity.com/packages/2d/textures-materials/sky/fantasy-skybox-free-18353)
  - [Barmetler | road system](https://assetstore.unity.com/packages/tools/level-design/road-system-192818)
+ - [DEBUG | CubexCube](https://assetstore.unity.com/packages/3d/environments/urban/cubexcube-free-city-pack-i-199815)
+ - [Car model | Prometeo](https://assetstore.unity.com/packages/tools/physics/prometeo-car-controller-209444)
 
 # Timeframe for Project:
 

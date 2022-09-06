@@ -3,7 +3,7 @@
 
 ## Third Party Assets 
 
-Please intall the following Third parties in your project folder and move them into a subdirectory named "resources" OR "ExternalAssets"
+Please intall the following Third parties in your project folder and move them into a subdirectory named "Resources" OR "ExternalAssets"
 
  - [Sky Box](https://assetstore.unity.com/packages/2d/textures-materials/sky/fantasy-skybox-free-18353)
  - [Barmetler | road system](https://assetstore.unity.com/packages/tools/level-design/road-system-192818)

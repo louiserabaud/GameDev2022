@@ -20,8 +20,8 @@ public class CameraController : MonoBehaviour
         target = GameObject.Find("Player").transform;
         translateSpeed = 10;
         rotationSpeed=12;
-        offset.x = 0;
-        offset.y = 2;
+       offset.x = 0;
+       offset.y = 2;
         offset.z = -5;
   
     

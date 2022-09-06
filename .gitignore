@@ -18,6 +18,9 @@
 /[Aa]ssets/Resources*
 /[Aa]ssets/Resources/
 /[Aa]ssets/Resources/*
+/[Aa]ssets/ExternalAssets*
+/[Aa]ssets/ExternalAssets/
+/[Aa]ssets/ExternalAssets/*
 
 #Ignore all .meta file
 *.meta

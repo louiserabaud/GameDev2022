@@ -1,3 +1,8 @@
+## Third Party Assets 
+
+ - [Sky Box](https://assetstore.unity.com/packages/2d/textures-materials/sky/fantasy-skybox-free-18353)
+ - [Barmetler | road system](https://assetstore.unity.com/packages/tools/level-design/road-system-192818)
+
 # Timeframe for Project:
 
 ## Example:
@@ -8,12 +13,4 @@
 NOTE: Task name should clearly describe what the objective of the task is. Date should be written in the (DD/MM/YYYY) format OR in accordance to the academic's week. Task should only be created and marked as completed with the two developers.
 
 ## Tasks:
-- [X] Wireframe. (29/7/2022)
-- [X] Get the third camera person working. (Week 3)
-- [X] Documentatin for Game Outline document. (Week 3)
-- [X] Add the roads. (Week 3)
-- [X] Add Traffic Lights (Week 3)
-- [ ] Add the speedometer (Week 6)
-- [X] Work together on competitor's states (Week 3)
-- [X] Set up the UI elements. (Week 4)
-- [ ] DOCUMENTATION ()
+ TODO

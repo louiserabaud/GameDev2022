@@ -9,7 +9,7 @@ public enum GameState
         Menu = 0 ,
         Play = 1
     }
- 
+
 
 public class GameManager : MonoBehaviour
 {
@@ -53,7 +53,4 @@ public class GameManager : MonoBehaviour
         yield return null;
         SceneManager.UnloadSceneAsync(currentSceneIndex);
     }
-
-
-    
 }

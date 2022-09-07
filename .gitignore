@@ -22,6 +22,8 @@
 /[Aa]ssets/ExternalAssets/
 /[Aa]ssets/ExternalAssets/*
 
+/UserSettings/Layouts/default-2021.dwlt
+
 #Ignore all .meta file
 *.meta
 #But not source file with postfix. which is everything but a folder

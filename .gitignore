@@ -23,6 +23,7 @@
 /[Aa]ssets/ExternalAssets/*
 
 /[Uu]serSettings/Layouts/default-2021.dwlt
+/[Uu]serSettings/Layouts/default-2021.dwlt
 
 #Ignore all .meta file
 *.meta

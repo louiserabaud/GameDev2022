@@ -1,3 +1,6 @@
+## Keep everything up-to-date
+
+![alt text](https://github.com/louiserabaud/GameDev2022/blob/main/Documentation/Readme_img/ruleofthumb.jpg?raw=true)
 
 
 

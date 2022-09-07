@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake() 
     { 
+        Debug.Log("GAME IS WORKING\n");
         if (Instance != null && Instance != this) 
         { 
             Destroy(this); 

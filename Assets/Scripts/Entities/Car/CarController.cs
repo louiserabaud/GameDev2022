@@ -7,6 +7,8 @@ public class CarController : MonoBehaviour
    private const string HORIZONTAL = "Horizontal";
     private const string VERTICAL = "Vertical";
 
+    bool isNPC = true;
+
     private float horizontalInput;
     private float verticalInput;
     private float currentSteerAngle;
@@ -29,10 +31,25 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        GetInput();
+        if (isNPC)
+        {
+            GetInput();
+        }
+        else
+        {
+            GetUserInput();
+        }
         HandleMotor();
         HandleSteering();
         UpdateWheels();
+       
+    }
+
+    private void GetUserInput()
+    {
+        horizontalInput = Input.GetAxis(HORIZONTAL);
+        verticalInput = Input.GetAxis(VERTICAL);
+        isBreaking = Input.GetKey(KeyCode.Space);
     }
 
 

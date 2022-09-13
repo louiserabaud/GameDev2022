@@ -11,6 +11,7 @@ public class WaypointManagerWindow : EditorWindow
     {
         GetWindow<WaypointManagerWindow>();
     }
+    
     public Transform waypointRoot;
 
     private void OnGUI() 
@@ -54,7 +55,7 @@ public class WaypointManagerWindow : EditorWindow
 
     void CreateWaypointBefore()
     {
-        GameObject waypointObject = new GameObject("waypoint" + waypointRoot.childCount,typeof(Waypoint));
+        GameObject waypointObject = new GameObject("Waypoint" + waypointRoot.childCount,typeof(Waypoint));
         waypointObject.transform.SetParent(waypointRoot,false);
 
         Waypoint newWaypoint = waypointObject.GetComponent<Waypoint>();
@@ -75,7 +76,7 @@ public class WaypointManagerWindow : EditorWindow
 
     void CreateWaypointAfter()
     {
-        GameObject waypointObject = new GameObject("waypoint" + waypointRoot.childCount,typeof(Waypoint));
+        GameObject waypointObject = new GameObject("Waypoint" + waypointRoot.childCount,typeof(Waypoint));
         waypointObject.transform.SetParent(waypointRoot,false);
 
         Waypoint newWaypoint = waypointObject.GetComponent<Waypoint>();
@@ -110,7 +111,8 @@ public class WaypointManagerWindow : EditorWindow
 
     void CreateWaypoint()
     {
-        GameObject waypointObject = new GameObject("waypoint" + waypointRoot.childCount,typeof(Waypoint));
+        GameObject waypointObject = new GameObject("Waypoint" + waypointRoot.childCount,typeof(Waypoint));
+      
         waypointObject.transform.SetParent(waypointRoot,false);
 
         Waypoint waypoint = waypointObject.GetComponent<Waypoint>();

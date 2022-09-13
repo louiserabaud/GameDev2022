@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Vector3 offset;
@@ -22,9 +23,6 @@ public class CameraController : MonoBehaviour
         rotationSpeed=12;
        offset.x = 0;
        offset.y = 2;
-        offset.z = -5;
-  
-    
     }
 
     private void Start(){

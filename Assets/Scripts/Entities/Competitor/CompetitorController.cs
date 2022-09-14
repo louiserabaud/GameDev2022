@@ -7,8 +7,10 @@ using UnityEngine.AI;
 public class CompetitorController : MonoBehaviour
 {
     public GameObject _Car;
-
-    void Awake(){
+    
+    void Awake()
+    {
         // instantiate the car here
     }
+
 }

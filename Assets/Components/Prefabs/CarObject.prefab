@@ -886,6 +886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed95073e3a76fd948a02f0d581e8d2f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isNPC: 1
   motorForce: 1000
   breakForce: 3000
   maxSteerAngle: 30

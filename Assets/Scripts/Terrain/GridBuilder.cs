@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/*
 public class Point
 {
     public int X;
@@ -48,7 +48,6 @@ public enum CellType
     Building,
     Path
 }
-
 public class GridBuilder : MonoBehaviour
 {
     public int xSize;
@@ -69,3 +68,4 @@ public class GridBuilder : MonoBehaviour
         return false;
     }
 }
+*/

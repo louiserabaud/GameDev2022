@@ -5,7 +5,6 @@ using UnityEngine;
 public class Waypoint : MonoBehaviour
 {
     public Waypoint _previousWaypoint;
-    public Waypoint _nextWaypoint;
     public List<Waypoint> neighbours = new List<Waypoint>();
     public List<Waypoint> parents = new List<Waypoint>();
 

@@ -115,7 +115,7 @@ public class WaypointManagerWindow : EditorWindow
         Waypoint selectedWaypoint = Selection.activeGameObject.GetComponent<Waypoint>();
         if(selectedWaypoint.neighbours.Count>1)
         {
-            selectedWaypoint._nextWaypoint._previousWaypoint = selectedWaypoint._previousWaypoint;
+            //selectedWaypoint._nextWaypoint._previousWaypoint = selectedWaypoint._previousWaypoint;
             return;
         }
         if(selectedWaypoint._previousWaypoint !=null)

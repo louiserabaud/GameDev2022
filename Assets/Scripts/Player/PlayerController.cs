@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController _Instance { get; private set; }
+    public GameObject car;
 
     public int penalties=0;
 
@@ -18,10 +19,15 @@ public class PlayerController : MonoBehaviour
         { 
             _Instance = this; 
         }
+
+        car.GetComponent<CarController>().isNPC = false;
+        
     }
 
     public void CrossedRedLight(){
         penalties+=1;
     }
+
+   
 
 }

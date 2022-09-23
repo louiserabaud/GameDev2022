@@ -7,7 +7,7 @@ public class CarController : MonoBehaviour
    private const string HORIZONTAL = "Horizontal";
     private const string VERTICAL = "Vertical";
 
-    bool isNPC = true;
+    public bool isNPC = true;
 
     private float horizontalInput;
     private float verticalInput;
@@ -55,9 +55,9 @@ public class CarController : MonoBehaviour
 
     private void GetInput()
     {
-        horizontalInput = Input.GetAxis(HORIZONTAL);
+       /* horizontalInput = Input.GetAxis(HORIZONTAL);
         verticalInput = Input.GetAxis(VERTICAL);
-        isBreaking = Input.GetKey(KeyCode.Space);
+        isBreaking = Input.GetKey(KeyCode.Space);*/
     }
 
     private void HandleMotor()

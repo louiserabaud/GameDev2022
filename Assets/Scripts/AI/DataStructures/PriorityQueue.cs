@@ -4,33 +4,47 @@ using UnityEngine;
 using System;
 
 
-public class PriorityQueue<T>
+public class PriorityQueue
 {
-    private List<Tuple<T,int>> items = new List<Tuple<T,int>>();
+    private List<Node> items = new List<Node>();
     
-    public void Enqueue(T item, int priority)
+    public void Enqueue(Node item)
     {
-        items.Add(Tuple.Create(item,priority));
+        items.Add(item);
     }
-    public T Dequeue()
+    public Node Dequeue()
     {
         int index = Peek();
-        var item = items[index].Item1;
+        var item = items[index];
         items.RemoveAt(index);
         return item;
     }
     private int Peek()
     {
-        int hightestP = int.MinValue;
+        var bestValue = float.MaxValue;
+        int bestIndex = 0;
         int index = 0;
         foreach (var item in items)
         {
-            if(item.Item2 < items[hightestP].Item2)
+            if(item.cost < bestValue)
             {
-                hightestP=index;
+                bestIndex=index;
+                bestValue = item.cost;
             }
             index++;
         }
-        return hightestP;
+        return bestIndex;
+    }
+
+    public bool isEmpty()
+    {
+        if (items.Count==0)
+            return true;
+        return false;
+    }
+
+    public int Size()
+    {
+        return items.Count;
     }
 }

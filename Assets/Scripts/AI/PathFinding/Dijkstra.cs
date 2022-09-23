@@ -3,34 +3,67 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
+
+
 public static class Dijkstra 
 {
-    public static List<Waypoint> GetShortestPath(Waypoint start, Waypoint end)
+    public static Node GetShortestPath(Graph graph, Node start, Node end)
     {
-        var waypoints = new List<Waypoint>();
-        var unvisited = new List<Waypoint>();
-        var queue = new PriorityQueue<Waypoint>();
+      
+        var unvisited = new List<Node>();
+        var queue = new PriorityQueue();
 
-        if (start == null || end == null)
+    
+
+        if (graph.nodes.Count<1 || start == null || end == null)
             return null;
 
         //INITIALISATION
-        var currentWaypoint = start;
-        while(currentWaypoint._nextWaypoint!=null)
+        foreach (var node in graph.nodes)
         {
-            currentWaypoint.distance = float.MinValue;
-            currentWaypoint._previousWaypoint = null;
-            
+            node.previous = null;
+            if (node.position == start.position)
+            {
+                node.cost = 0;
+                queue.Enqueue(node);
+            }
+            else
+            {
+               node.cost = float.MaxValue;
+                queue.Enqueue(node);
+            }
         }
+       
+        Debug.Log(queue.Size());
         //set the starting node's distance to zero 
-        unvisited[0].distance=0;
+        //unvisited[0].distance=0;
         //queue.Enqueue()
         //Find the shortest Path
-        while(unvisited.Count>0)
+        bool found = false;
+        while(queue.Size()>0 || !found)
         {
-
+            var node = queue.Dequeue();
+            //Debug.Log("****************************");
+            //Debug.Log("dequeue: " + node.ToString() + "cost: " + node.cost);
+            if(node.position == end.position)
+            {
+                //Debug.Log("Found path");
+                return node;
+            }
+            foreach(var neighbour in node.neighbours)
+            {
+                var newCost = node.cost + node.GetDistance(neighbour);
+                //Debug.Log("newcost: " + newCost + "     from-> " + neighbour.ToString());
+                if (newCost < neighbour.cost)
+                {
+                    neighbour.cost = newCost;
+                    neighbour.previous = node;
+                }
+            }
+            //Debug.Log("****************************");
         }
 
-        return waypoints;
+        return null;
     }
 }

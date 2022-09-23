@@ -68,16 +68,15 @@ public class AIController : MonoBehaviour
                             {
                                 System.Random rnd = new System.Random();
                                 currentPosition = currentPosition.neighbours[rnd.Next(currentPosition.neighbours.Count)];
-                                //Debug.Log("move to " + currentPosition.transform.position );
+                                Debug.Log("move to " + currentPosition.transform.position );
                                 _navMeshAgent.SetDestination(currentPosition.transform.position);
 
                             }
                             else{
                                 
                                 currentPosition = currentPosition.neighbours[0];
-                                 //Debug.Log("move to " + currentPosition.transform.position );
+                                 Debug.Log("move to " + currentPosition.transform.position );
                                 _navMeshAgent.SetDestination(currentPosition.transform.position);
-
                             }
                         
                     }

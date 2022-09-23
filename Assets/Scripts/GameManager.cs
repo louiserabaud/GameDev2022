@@ -27,7 +27,8 @@ public class GameManager : MonoBehaviour
         else 
         { 
             Instance = this; 
-        }    
+        }  
+        //register to switch state event   
         GameStateEntity.SwitchState += SwitchGameState;
     }
 

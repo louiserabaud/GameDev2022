@@ -69,6 +69,8 @@ public class TrafficSystemEditorWindow : EditorWindow
 
         newWaypoint.parent = parent;
         parent.next.Add(newWaypoint);
+        waypoint.transform.position = parent.transform.position;
+        waypoint.transform.forward = parent.transform.forward;
         Selection.activeGameObject = waypoint.gameObject;
     }
 

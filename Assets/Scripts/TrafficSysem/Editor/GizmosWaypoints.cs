@@ -10,6 +10,14 @@ public static class GizmosWaypoints
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(waypoint.GetPosition(),0.5f);
+        if(waypoint.next.Count>1)
+        {
+            foreach(var nextpoint in waypoint.next)
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawLine(waypoint.transform.position, nextpoint.transform.position);
+            }
+        }
     }
 
 }

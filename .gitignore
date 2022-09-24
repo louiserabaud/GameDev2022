@@ -4,11 +4,13 @@
 #
 /[Ll]ibrary/
 /[Uu]serSettings/
+/[Pp]rojectSettings/
 /[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/
 /[Bb]uilds/
 /[Ll]ogs/
+/[Pp]ackages/
 /[Mm]emoryCaptures/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored

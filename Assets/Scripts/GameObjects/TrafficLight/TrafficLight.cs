@@ -6,7 +6,11 @@ using System;
 public class TrafficLight : MonoBehaviour
 {
     public static event Action CrossedRedLight;
-    private enum LightColor
+    public static event Action OnGreenLight;
+
+    
+
+    public enum LightColor
     {
         Green,
         Red
@@ -17,7 +21,7 @@ public class TrafficLight : MonoBehaviour
         horizontal
     }
 
-    private LightColor color=LightColor.Green;
+    public LightColor color;
     private Axis axis;
 
     public Light pointLight;
@@ -46,15 +50,19 @@ public class TrafficLight : MonoBehaviour
         else
         {
             pointLight.color = new Color(0, 1, 0);
+            OnGreenLight?.Invoke();
         }
     }
 
+    void Update()
+    {
+        
+    }
+
     void OnTriggerEnter(Collider otherObject){
-        Debug.Log(otherObject.gameObject.tag);
-         if(otherObject.gameObject.tag=="Player"){
-            Debug.Log("Player crossed red light");
+        Debug.Log("Object crossed a red light");
+        if(color==LightColor.Red)
             CrossedRedLight?.Invoke();
-        }
     }
   
 

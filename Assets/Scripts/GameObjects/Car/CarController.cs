@@ -21,6 +21,9 @@ public class CarController : MonoBehaviour
     private float forwardAmount;
     private float turnAmount;
 
+    public Transform sensorPos;
+    public float sensorLenght = 10f;
+
     private Rigidbody carRigidbody;
     #endregion
 
@@ -29,6 +32,7 @@ public class CarController : MonoBehaviour
     }
 
     private void Update() {
+        Sensor();
         if (forwardAmount > 0) {
             // Accelerating
             speed += forwardAmount * acceleration * Time.deltaTime;
@@ -138,4 +142,15 @@ public class CarController : MonoBehaviour
         this.forwardAmount = value;
     }
 
+    public void Sensor()
+    {
+
+        RaycastHit hit;
+        Vector3 sensorStartPos = sensorPos.position;
+        if (Physics.Raycast(sensorStartPos,transform.forward,out hit, sensorLenght))
+        {
+            
+        }
+        Debug.DrawLine(sensorStartPos,hit.point);
+    }
 }

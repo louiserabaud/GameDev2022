@@ -1,22 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public enum CarStatus
-{
-    Stopped,
-    Driving
-}
-
-public enum AlgorithmType
-{
-    Random, 
-    Dijkstra
-}
+using System;
 
 
 public class CarAIController : MonoBehaviour
 {
+    public enum CarStatus
+    {
+        Stopped,
+        Driving
+    }
+
+    public enum AlgorithmType
+    {
+        Random, 
+        Dijkstra
+    }
+
     public int carID;
 
     private CarStatus status;
@@ -35,13 +36,17 @@ public class CarAIController : MonoBehaviour
    
     void Awake ()
     {
+        TrafficLight.CrossedRedLight+=ApplyCrossedLight;
+        TrafficLight.OnGreenLight+=Restart;
+
         carController = car.GetComponent<CarController>();
+        status = CarStatus.Driving;
     
     }
 
     void Update()
     {
-       Debug.Log(carController.GetSpeed());
+       
         if(hasReachedTarget())
             SetNextTarget();
       
@@ -63,9 +68,28 @@ public class CarAIController : MonoBehaviour
                 break;
         }
     }
+    void ApplyCrossedLight()
+    {
+        if(status!=CarStatus.Stopped)
+        {
+            Debug.Log("stop status");
+            status = CarStatus.Stopped;
+        }
+    }
+
+    void Restart()
+    {
+        Debug.Log("restart status");
+        status = CarStatus.Driving;
+    }
 
     private void MoveCar()
     {
+        if(status == CarStatus.Stopped)
+        {
+            carController.StopCompletely();
+            return;
+        }
         //default values
         float forwardAmount = 1f;
         float turnAmount = 0f;
@@ -82,7 +106,7 @@ public class CarAIController : MonoBehaviour
         if(CheckForTurn(targetPosition.GetPosition(),FindNextTarget().GetPosition()))
                 
         {   
-            Debug.Log("decrease");
+           
             carController.SetAcceleration(-1f);
         }
 
@@ -124,7 +148,6 @@ public class CarAIController : MonoBehaviour
     private void SetNextTarget()
     {
         targetPosition = targetPosition.next[0];
-        Debug.Log("next target: " + targetPosition.GetPosition());
     }
 
     private Waypoint FindNextTarget()

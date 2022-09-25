@@ -1658,6 +1658,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: d80c7433031fdee44bf3910c4b046ce7, type: 3}
   m_PrefabInstance: {fileID: 146759680}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &160823349 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8471062393036952124, guid: d0e60507283a6d14aa953bd54a24bf4b, type: 3}
+  m_PrefabInstance: {fileID: 1355243241}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &164861226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3215,6 +3220,10 @@ PrefabInstance:
     - target: {fileID: 7923260837716525578, guid: 5e8f0e19a5eeb084fb3f85ea7e33bf7d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8733008580128098254, guid: 5e8f0e19a5eeb084fb3f85ea7e33bf7d, type: 3}
+      propertyPath: color
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e8f0e19a5eeb084fb3f85ea7e33bf7d, type: 3}
@@ -8080,6 +8089,7 @@ MonoBehaviour:
   groupId2:
   - {fileID: 1871907544}
   - {fileID: 1348548934}
+  lightsDuration: 8
 --- !u!1001 &779260413
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14989,6 +14999,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5378216259565342750, guid: d0e60507283a6d14aa953bd54a24bf4b, type: 3}
+      propertyPath: sensorPos
+      value: 
+      objectReference: {fileID: 160823349}
+    - target: {fileID: 5378216259565342750, guid: d0e60507283a6d14aa953bd54a24bf4b, type: 3}
+      propertyPath: sensorLenght
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378216259565342750, guid: d0e60507283a6d14aa953bd54a24bf4b, type: 3}
       propertyPath: maxSteerAngle
       value: 60
       objectReference: {fileID: 0}
@@ -15388,6 +15406,10 @@ PrefabInstance:
     - target: {fileID: 7923260837716525578, guid: 5e8f0e19a5eeb084fb3f85ea7e33bf7d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8733008580128098254, guid: 5e8f0e19a5eeb084fb3f85ea7e33bf7d, type: 3}
+      propertyPath: color
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e8f0e19a5eeb084fb3f85ea7e33bf7d, type: 3}

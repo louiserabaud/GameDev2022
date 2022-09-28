@@ -5,7 +5,7 @@ using System;
 
 public class TrafficLight : MonoBehaviour
 {
-    public static event Action CrossedRedLight;
+    public static event Action<String> CrossedRedLight;
     public static event Action OnGreenLight;
 
     
@@ -59,11 +59,11 @@ public class TrafficLight : MonoBehaviour
         
     }
 
-    void OnTriggerEnter(Collider otherObject){
-        if(color==LightColor.Red && otherObject.GetComponent<Collider>().gameObject.tag=="player")
+    void OnTriggerEnter(Collider otherObjectCollider){
+        var otherObject = otherObjectCollider.GetComponent<Collider>().gameObject;
+        if(color==LightColor.Red)
         {
-            Debug.Log("Player crossed a red light");
-            CrossedRedLight?.Invoke();
+            CrossedRedLight?.Invoke(otherObject.name);
         }
     }
   

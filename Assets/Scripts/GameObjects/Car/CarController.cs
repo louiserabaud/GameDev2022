@@ -29,6 +29,7 @@ public class CarController : MonoBehaviour
 
     private void Awake() {
         carRigidbody = GetComponent<Rigidbody>();
+        gameObject.name = "Car " + CarFactory.GetCarID();
     }
 
     private void Update() {

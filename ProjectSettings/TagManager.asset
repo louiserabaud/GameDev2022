@@ -8,6 +8,7 @@ TagManager:
   - TrafficLight
   - Intersection
   - TrafficSystem
+  - carNPC
   layers:
   - Default
   - TransparentFX

@@ -18,7 +18,7 @@ public class CarAIController : MonoBehaviour
         Dijkstra
     }
 
-    public int carID;
+    public int carID=0;
 
     private CarStatus status;
     public AlgorithmType algorithm;
@@ -46,7 +46,6 @@ public class CarAIController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(status);
        
         if(hasReachedTarget())
             SetNextTarget();
@@ -69,18 +68,17 @@ public class CarAIController : MonoBehaviour
                 break;
         }
     }
-    void ApplyCrossedLight()
+    void ApplyCrossedLight(string id)
     {
-        if(status!=CarStatus.Stopped)
+        if(status!=CarStatus.Stopped && gameObject.name==id)
         {
-            Debug.Log("stop status");
+            Debug.Log(carID + " status:stopped");
             status = CarStatus.Stopped;
         }
     }
 
     void Restart()
     {
-        Debug.Log("restart status");
         status = CarStatus.Driving;
     }
 

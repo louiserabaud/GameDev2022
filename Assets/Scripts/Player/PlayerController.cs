@@ -161,9 +161,10 @@ public class PlayerController : MonoBehaviour
         return rb.velocity.magnitude;
     }
 
-    public void ApplyPenalty()
+    public void ApplyPenalty(string id)
     {
-        Debug.Log("apply p");
+        if(id=="PlayerCar")
+            return;
         penalty+=1;
     }
 }

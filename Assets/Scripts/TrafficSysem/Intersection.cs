@@ -13,16 +13,24 @@ public class Intersection : MonoBehaviour
     void Start()
     {
         //UpdateGoup(groupId1);
-        InvokeRepeating("SwitchLights", lightsDuration, lightsDuration);
+        SwitchLights(groupId1);
+        InvokeRepeating("UpdateGroupLight", lightsDuration, lightsDuration);
     }
 
-    void SwitchLights()
+    void SwitchLights(List<TrafficLight> group)
     {
-        foreach(var light in groupId1)
+        foreach(var light in group)
         {
             light.SwitchColor();
         }
     }
+
+    void UpdateGroupLight()
+    {
+        SwitchLights(groupId1);
+        SwitchLights(groupId2);
+    }
+
 
     
 }

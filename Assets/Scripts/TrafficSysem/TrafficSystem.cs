@@ -13,9 +13,12 @@ public class TrafficSystem : MonoBehaviour
         intersections = new List<Intersection>();
     }
 
-    public void AddWaypoint(Waypoint point)
+    public void AddWaypoint(Waypoint waypoint)
     {
-        waypoints.Add(point);
+        waypoints.Add(waypoint);
+    }
+    public int GetWaypointsCount(){
+        return waypoints.Count;
     }
 
     public void AddIntersection(Intersection intersection)

@@ -60,9 +60,11 @@ public class TrafficLight : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider otherObject){
-        Debug.Log("Object crossed a red light");
-        if(color==LightColor.Red)
+        if(color==LightColor.Red && otherObject.GetComponent<Collider>().gameObject.tag=="player")
+        {
+            Debug.Log("Player crossed a red light");
             CrossedRedLight?.Invoke();
+        }
     }
   
 

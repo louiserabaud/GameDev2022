@@ -46,6 +46,7 @@ public class CarAIController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(status);
        
         if(hasReachedTarget())
             SetNextTarget();

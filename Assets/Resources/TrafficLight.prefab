@@ -195,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0669370e066bace4ca413972c5658b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  color: 0
   pointLight: {fileID: 2900089821670122490}
 --- !u!65 &-4529210094724525285
 BoxCollider:

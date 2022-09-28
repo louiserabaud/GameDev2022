@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 419060804248023925}
   - component: {fileID: 8192798590876112436}
   - component: {fileID: 5378216259565342750}
+  - component: {fileID: 6590457877406823474}
   m_Layer: 0
   m_Name: Simple_Car
   m_TagString: Untagged
@@ -231,6 +232,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d468ade602a02a47b54cd731a023e1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sensor: {fileID: 8471062393036952124}
+  sensorLenght: 10
+--- !u!114 &6590457877406823474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419060804247727957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2e55112eb50e6e4ca1683a248cb5870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carID: 0
+  algorithm: 0
+  stoppingDistance: 7
+  trafficSystem: {fileID: 0}
+  path: []
+  car: {fileID: 0}
+  targetPosition: {fileID: 0}
 --- !u!1 &419060804247727959
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ public class CarController : MonoBehaviour
     private float forwardAmount;
     private float turnAmount;
 
-    public Transform sensorPos;
+    public float sensor= -0.5f;
     public float sensorLenght = 10f;
 
     private Rigidbody carRigidbody;
@@ -146,11 +146,12 @@ public class CarController : MonoBehaviour
     {
 
         RaycastHit hit;
-        Vector3 sensorStartPos = sensorPos.position;
+        Vector3 sensorStartPos = transform.position;
+        sensorStartPos.z += sensor;
         if (Physics.Raycast(sensorStartPos,transform.forward,out hit, sensorLenght))
         {
             
         }
-        Debug.DrawLine(sensorStartPos,hit.point);
+       // Debug.DrawLine(sensorStartPos,hit.point);
     }
 }

@@ -163,7 +163,7 @@ public class PlayerController : MonoBehaviour
 
     public void ApplyPenalty(string id)
     {
-        if(id=="PlayerCar")
+        if(id!=gameObject.name)
             return;
         penalty+=1;
     }

@@ -146,13 +146,19 @@ public class CarController : MonoBehaviour
     public void Sensor()
     {
 
-        RaycastHit hit;
+        RaycastHit[] hits;
         Vector3 sensorStartPos = transform.position;
-        sensorStartPos.z += sensor;
-        if (Physics.Raycast(sensorStartPos,transform.forward,out hit, sensorLenght))
+        hits = Physics.RaycastAll(sensorStartPos,transform.forward, sensorLenght);
+        //sensorStartPos.z += sensor;
+        Debug.Log(gameObject.name + " " + hits.Length);
+        for (int i = 0; i < hits.Length; i++)
         {
-            
+            Debug.Log(gameObject.name + " " + hits[i].collider.gameObject.tag);
+            if(hits[i].collider.gameObject.tag == "Car")
+            {
+                Debug.Log("detected car");
+                Debug.DrawLine(sensorStartPos,hits[i].point);
+            }
         }
-       // Debug.DrawLine(sensorStartPos,hit.point);
     }
 }

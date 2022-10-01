@@ -8,6 +8,8 @@ TagManager:
   - Road
   - CarObject
   - Building
+  - Pickup
+  - Delivery
   layers:
   - Default
   - TransparentFX

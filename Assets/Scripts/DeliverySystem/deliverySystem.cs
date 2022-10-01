@@ -4,31 +4,20 @@ using UnityEngine;
 
 public class deliverySystem : MonoBehaviour
 {
-    public static deliverySystem current;
+    //tell the game a new event is being set up
     public static System.Action OnNewRound;
 
-    private void Awake()
+
+    void Start()
     {
-        //current = this;
+        
     }
 
     void Update()
     {
-        OnNewRound?.Invoke();
-        System.Delay(1000);
-    }
-    //public event System.Action OnNewRound;
-
-
-    public void newRound()
-    {
-        //listen for roundDone event
-        OnNewRound?.Invoke();
-    }
-
-    public void OnTriggerEnter()
-    {
-        Debug.Log("Q was pressed");
-        OnNewRound?.Invoke();
+        Debug.Log("Invoke new event");
+        OnNewRound?.Invoke();               //invoke new event
+        //Delay(1000);
+        //System.WaitForSeconds(2);
     }
 }

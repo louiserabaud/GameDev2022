@@ -27,9 +27,6 @@ public class AIController : MonoBehaviour
     {
         _navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         AIPath = new List<Vector3>();
-
-        
-        
     }
 
     void Start() 
@@ -75,7 +72,7 @@ public class AIController : MonoBehaviour
                             else{
                                 
                                 currentPosition = currentPosition.neighbours[0];
-                                 //Debug.Log("move to " + currentPosition.transform.position );
+                                 Debug.Log("move to " + currentPosition.transform.position );
                                 _navMeshAgent.SetDestination(currentPosition.transform.position);
 
                             }

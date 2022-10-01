@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
+    public int radiuss = 23;
     public enum Construction{
         buisness,
         house
@@ -20,12 +21,12 @@ public class Building : MonoBehaviour
     {
         gameObject.AddComponent<SphereCollider>();
         var collider = gameObject.GetComponent<SphereCollider>();
-        collider.radius = 23;
+        collider.radius = radiuss;
     }
 
     public void OnDrawGizmo()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, 23);
+        Gizmos.DrawSphere(transform.position, radiuss);
     }
 }

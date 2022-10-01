@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class deliveryPoint : MonoBehaviour
 {
+    //initiate event in case delivered successfully
+    public static System.Action OnCompleted;
+
     //this is the prefab that will appear in random loccations
     public GameObject locatePrefab;
 
@@ -27,9 +30,21 @@ public class deliveryPoint : MonoBehaviour
         var houses = BuildingsController.Instance.getHouses();
         int index = Random.Range(0, houses.Count - 1);
         Vector3 deliveryPoint = houses[index].getPosition();
+
+        //
+
     }
 
-
+    public void OnTriggerEnter()
+    {
+        if (GUI.Button(new Rect(Screen.width / 2 - 50, 5, 100, 30), "deliver"))
+        {
+            if (OnCompleted != null)
+            {
+                OnCompleted?.Invoke();
+            }
+        }
+    }
 
     public void createDeliveryLocation()
     {

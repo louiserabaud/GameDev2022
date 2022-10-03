@@ -33,7 +33,6 @@ public class CarController : MonoBehaviour
     }
 
     private void Update() {
-        Sensor();
         if (forwardAmount > 0) {
             // Accelerating
             speed += forwardAmount * acceleration * Time.deltaTime;
@@ -143,22 +142,13 @@ public class CarController : MonoBehaviour
         this.forwardAmount = value;
     }
 
-    public void Sensor()
+    public Vector3 GetPosition()
     {
+        return transform.position;
+    }
 
-        RaycastHit[] hits;
-        Vector3 sensorStartPos = transform.position;
-        hits = Physics.RaycastAll(sensorStartPos,transform.forward, sensorLenght);
-        //sensorStartPos.z += sensor;
-        Debug.Log(gameObject.name + " " + hits.Length);
-        for (int i = 0; i < hits.Length; i++)
-        {
-            Debug.Log(gameObject.name + " " + hits[i].collider.gameObject.tag);
-            if(hits[i].collider.gameObject.tag == "Car")
-            {
-                Debug.Log("detected car");
-                Debug.DrawLine(sensorStartPos,hits[i].point);
-            }
-        }
+    public Transform GetTransform()
+    {
+        return transform;
     }
 }

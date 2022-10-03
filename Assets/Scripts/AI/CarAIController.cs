@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEditor;
 
 
 public class CarAIController : MonoBehaviour
@@ -23,34 +24,42 @@ public class CarAIController : MonoBehaviour
     private CarStatus status;
     public AlgorithmType algorithm;
 
-    public float stoppingDistance = 7f;
+    public float stoppingDistance = 1f;
+    public float reachedTargetDistance = 10f;
+    private float sensorLenght =1.5f;
 
-    public TrafficSystem trafficSystem = null;
-    public List<Vector3> path;
+    public List<Waypoint> path=null;
+    public Waypoint currentTarget=null;
 
-    public GameObject car;
     private CarController carController;
 
-    
-    public Waypoint targetPosition;
+    public GameObject FrontSensor;
+
    
     void Awake ()
     {
-        TrafficLight.CrossedRedLight+=ApplyCrossedLight;
-        TrafficLight.OnGreenLight+=Restart;
-
-        carController = car.GetComponent<CarController>();
+        carController = gameObject.GetComponent<CarController>();
         status = CarStatus.Driving;
     
+    }
+    void Start()
+    {
+         //path = TrafficSystem.Instance.GetWaypoints();
     }
 
     void Update()
     {
-       
+        if(currentTarget==null)
+            return;
+        SensorUpdate();
+        MoveCar();
         if(hasReachedTarget())
             SetNextTarget();
-      
-        MoveCar();
+    }
+
+    private void SetNextTarget()
+    {
+        currentTarget = WaypointNavigator.FindNextWaypoint(currentTarget);
     }
 
     private void SetAlgorithm()
@@ -60,26 +69,13 @@ public class CarAIController : MonoBehaviour
             case AlgorithmType.Random:
                 break;
             case AlgorithmType.Dijkstra:
-                SetTargetPosition(
+                /*SetTargetPosition(
                     Dijkstra.FindShortestPath(trafficSystem.Duplicate())
-                );
+                );*/
                 break;
             default:
                 break;
         }
-    }
-    void ApplyCrossedLight(string id)
-    {
-        if(status!=CarStatus.Stopped && gameObject.name==id)
-        {
-            Debug.Log(carID + " status:stopped");
-            status = CarStatus.Stopped;
-        }
-    }
-
-    void Restart()
-    {
-        status = CarStatus.Driving;
     }
 
     private void MoveCar()
@@ -90,77 +86,48 @@ public class CarAIController : MonoBehaviour
             return;
         }
         //default values
-        float forwardAmount = 1f;
-        float turnAmount = 0f;
-
-        float reachedTargetDistance = 10f;
-        float distanceToTarget = CheckDistanteToTarget();
-        //Debug.Log(distanceToTarget);
-
-        if (distanceToTarget > reachedTargetDistance) {
-            // Still too far, keep going
-            turnAmount = GetAngleBetweenPosAndTarget(GetPosition(),targetPosition.GetPosition());
-            //check if next node is a turn
-        }
-        if(CheckForTurn(targetPosition.GetPosition(),FindNextTarget().GetPosition()))
-                
-        {   
-           
-            carController.SetAcceleration(-1f);
-        }
-
-        carController.SetInputs(forwardAmount, turnAmount);
+        Vector2 movingValues = WaypointNavigator.GetAccelerationAndSteering(carController.GetPosition(),currentTarget.GetPosition(),reachedTargetDistance,carController.GetTransform());
+        carController.SetInputs(movingValues[0],movingValues[1]);
         
     }
 
-    private bool CheckForTurn(Vector3 target, Vector3 next)
-    {
-        var angle = GetAngleBetweenPosAndTarget(target,next);
-        if(angle>0.3f || angle<-0.3f)
-            return true;
-        return false;
-    }
-    
-
-    private float GetAngleBetweenPosAndTarget(Vector3 position, Vector3 target)
-    {
-        Vector3 dirToMovePosition = (target - position).normalized;
-        float turnAmount = Mathf.Clamp(this.transform.InverseTransformDirection(dirToMovePosition).x, -1, 1);
-        return turnAmount;
-    }
-
-
     private bool hasReachedTarget()
     {
-        if (CheckDistanteToTarget()<=5f)
-        {
+        if (WaypointNavigator.CheckDistanceToPoint(carController.GetPosition(),currentTarget.GetPosition())<=5f)
             return true;
-        }
         return false;
     }
 
-    private float CheckDistanteToTarget()
-    {
-        return Vector3.Distance(transform.position, targetPosition.GetPosition());
-    }
 
-    private void SetNextTarget()
-    {
-        targetPosition = targetPosition.next[0];
-    }
+    public void SensorUpdate()
+    {   
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(FrontSensor.transform.position,FrontSensor.transform.forward,sensorLenght);
+        for(int i=0;i<hits.Length;i++)
+        {
+            
+            if(hits[i].collider.tag =="Player"
+                || hits[i].collider.tag =="Car")
+            {
+                Debug.Log(gameObject.name);
+                status=CarStatus.Stopped;
+                carController.StopCompletely();
+            }
+            if(hits[i].collider.tag=="TrafficLight")
+            {
+                Debug.Log("Lights");
+                var lights= hits[i].collider.GetComponent<TrafficLight>();
+                if(lights.IsRed())
+                    status=CarStatus.Stopped;
+                else if(!lights.IsRed() && status==CarStatus.Stopped)
+                    status = CarStatus.Driving;
+            }
+            else
+            {
+                status = CarStatus.Driving;
+            }
 
-    private Waypoint FindNextTarget()
-    {
-        return targetPosition.next[0];
+        }
     }
-
-    private void SetTargetPosition(Waypoint target)
-    {
-        targetPosition = target;
-    }
-    
-    public Vector3 GetPosition()
-    {
-        return transform.position;
-    }
+   
 }

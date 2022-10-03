@@ -10,6 +10,8 @@ TagManager:
   - TrafficSystem
   - carNPC
   - Car
+  - deliveryPrefab
+  - pickupPrefab
   layers:
   - Default
   - TransparentFX

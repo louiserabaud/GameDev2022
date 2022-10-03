@@ -3,115 +3,101 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.Linq;
+using System;
 
 
 public class TrafficSystemEditorWindow : EditorWindow
-{
-    [SerializeField] private GameObject trafficSystemObject;
-    [SerializeField] private TrafficSystem trafficSystemScript;
-
-    public static int nIntersection =0;
-    private bool isInit = false;
-
-    [MenuItem("Window/TafficSystem Editor")]
-    static void Init()
-    {
-        // Get existing open window or if none, make a new one:
-        TrafficSystemEditorWindow window = (TrafficSystemEditorWindow)EditorWindow.GetWindow(typeof(TrafficSystemEditorWindow));
-       // open the editor window
-        window.Show();
-    }
-
-
-    void OnGUI() 
-    {
-        if (GameObject.FindGameObjectWithTag("TrafficSystem") == null  )
-            CreateTrafficSystem();
-
-        DrawUILine(Color.clear);
-        //SerializedObject obj = new SerializedObject(this);
-        //(obj.FindProperty("trafficSystemScript"));
-        DrawButtons();
-        //obj.ApplyModifiedProperties();
-        
-    }
 
    
-
-    void CreateTrafficSystem()
+  {
+    [MenuItem("Tools/Waypoint Editor")]
+    public static void Open()
     {
-        if(isInit)
-            return;
-        
-        trafficSystemObject = new GameObject("TrafficSystem",typeof(TrafficSystem));
-        trafficSystemObject.tag = "TrafficSystem";
-        //create waypoints holder
-        var waypoints = new GameObject("Waypoints");
-        //create intersections holder
-        var intersections = new GameObject("Intersections");
-        // set the holders as children to the traffic system object
-        waypoints.transform.SetParent(trafficSystemObject.gameObject.transform,false);
-        intersections.transform.SetParent(trafficSystemObject.gameObject.transform,false);
-        //assign the traffic system script to its reference
-        trafficSystemScript = trafficSystemObject.GetComponent<TrafficSystem>();
-        //Instantiate(trafficSystemObject);
-        isInit = true;
+        GetWindow<TrafficSystemEditorWindow>();
     }
+    
+    public Transform trafficSystem;
+    public int waypointCount=0;
+    public int intersectionCount=0;
 
+    private void OnGUI() 
+    {
+        SerializedObject obj = new SerializedObject(this);
+        EditorGUILayout.PropertyField(obj.FindProperty("trafficSystem"));
+        if(trafficSystem==null)
+        {
+            EditorGUILayout.HelpBox("Root transform must be selected.Please assign a root transform.",MessageType.Warning);
+        }else{
+            EditorGUILayout.BeginVertical("box");
+            DrawButtons();
+            EditorGUILayout.EndVertical();
+        }
+        obj.ApplyModifiedProperties();
+    }
+    
     void DrawButtons()
     {
+        
         if(Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<Waypoint>())
         {
-            if(GUILayout.Button("Extrude Waypoint"))
+             if(GUILayout.Button("Create Waypoint after"))
             {
-                ExtrudeWaypoint();
+                AddWaypointAfter();
             }
-            if(GUILayout.Button("Merge waypoints"))
+             if(GUILayout.Button("Remove Waypoint"))
+            {
+               // RemoveWaypoint();
+            }
+            if (GUILayout.Button("Add a new branch"))
+            {
+               AddBranch();
+            }
+
+             if (GUILayout.Button("Merge two Points"))
             {
                 MergePoints();
             }
-            if(GUILayout.Button("Add a new branch"))
-            {
-                CreateWaypointBranch();
-            }
-        }
-        
-        else
+            
+        }else
         {
-            if(GUILayout.Button("Create a Waypoint"))
+            if(GUILayout.Button("Create Waypoint"))
             {
                 CreateWaypoint();
             }
-            if(GUILayout.Button("Create an Intersection"))
+             if(GUILayout.Button("Create an Intersection"))
             {
                 CreateIntersection();
             }
         }
     }
 
-    public void CreateWaypoint()
+    
+    void CreateWaypoint()
     {
-        var waypoint = new GameObject("Waypoint " + GetWaypointsCount(),typeof(Waypoint));
-        waypoint.gameObject.tag="Waypoint";
-        waypoint.transform.SetParent(trafficSystemObject.transform.GetChild(0),false);
-        AddWaypoint(waypoint.GetComponent<Waypoint>());
-        Selection.activeGameObject = waypoint;
+        GameObject waypointObject = new GameObject("Waypoint" + waypointCount,typeof(Waypoint));
+        waypointObject.transform.SetParent(trafficSystem.GetChild(0),false);
+        Selection.activeGameObject = waypointObject;
+        waypointCount++;
     }
 
-      void ExtrudeWaypoint()
+    void AddWaypointAfter()
     {
-        var parent = Selection.activeGameObject.GetComponent<Waypoint>();
+        Waypoint parent = Selection.activeGameObject.GetComponent<Waypoint>();
         CreateWaypoint();
-        var waypoint = Selection.activeGameObject.GetComponent<Waypoint>();
+        Waypoint waypoint = Selection.activeGameObject.GetComponent<Waypoint>();
         waypoint.parent = parent;
+        waypoint.SetPosition(parent.GetPosition() + new Vector3(1,0,1));
+        if(parent.next.Count>0)
+            {
+                waypoint.next = parent.next;
+                parent.next.Clear();
+            }
         parent.next.Add(waypoint);
-        waypoint.transform.position = parent.transform.position;
-        waypoint.transform.forward = parent.transform.forward;
     }
 
-    public void MergePoints()
+    void MergePoints()
     {
-        if(!(Selection.transforms.Length==2 && Selection.transforms[0].tag=="Waypoint" && Selection.transforms[1].tag=="Waypoint"))
+        if(!(Selection.transforms.Length!=2 && Selection.transforms[0].tag=="Waypoint" && Selection.transforms[1].tag=="Waypoint"))
             {
                 Debug.Log("not enough or too many obj selected");
                 return;
@@ -123,7 +109,38 @@ public class TrafficSystemEditorWindow : EditorWindow
         childPoint.parent = parentPoint;
     }
 
-    TrafficLight CreateTrafficLight(GameObject intersection,Vector3 position)
+    void AddBranch()
+    {
+        Waypoint parent = Selection.activeGameObject.GetComponent<Waypoint>();
+        CreateWaypoint();
+        Waypoint waypoint = Selection.activeGameObject.GetComponent<Waypoint>();
+        waypoint.parent = parent;
+        parent.next.Add(waypoint);
+        waypoint.SetPosition(parent.GetPosition()+ new Vector3(1,0,1));
+    }
+
+     void CreateIntersection()
+    {
+        var trafficLights = new List<TrafficLight>();
+        var locations = new Vector3[4]
+        {
+            new Vector3(3,0,-5),
+            new Vector3(-5,0,-3),
+            new Vector3(-3,0,5),
+            new Vector3(5,0,3)
+        };
+        var intersection = new GameObject("Intersection " + intersectionCount,typeof(Intersection));
+        intersection.transform.SetParent(trafficSystem.GetChild(1),false);
+        intersection.gameObject.tag = "Intersection";
+        intersection.gameObject.transform.position = new Vector3(0,0,0);
+        for(int i=0;i<4;i++)
+        {
+            var lights = CreateTrafficLight(intersection,locations[i]);
+        } 
+        intersectionCount++;
+    }
+
+     TrafficLight CreateTrafficLight(GameObject intersection,Vector3 position)
     {
         GameObject obj = (GameObject)Resources.Load("TrafficLight");
         var lights = Instantiate(obj,position,intersection.transform.rotation);
@@ -134,63 +151,6 @@ public class TrafficSystemEditorWindow : EditorWindow
         return lights.GetComponent<TrafficLight>();
     }
 
-    void CreateIntersection()
-    {
-        var trafficLights = new List<TrafficLight>();
-        var locations = new Vector3[4]
-        {
-            new Vector3(3,0,-5),
-            new Vector3(-5,0,-3),
-            new Vector3(-3,0,5),
-            new Vector3(5,0,3)
-        };
-        var intersection = new GameObject("Intersection " + nIntersection,typeof(Intersection));
-        intersection.transform.SetParent(trafficSystemObject.gameObject.transform.GetChild(1),false);
-        intersection.gameObject.tag = "Intersection";
-        intersection.gameObject.transform.position = new Vector3(0,0,0);
-        for(int i=0;i<4;i++)
-        {
-            var lights = CreateTrafficLight(intersection,locations[i]);
-        } 
-    }
-
-    void CreateWaypointBranch()
-    {
-        var waypoint = Selection.activeGameObject.GetComponent<Waypoint>();
-        CreateWaypoint();
-        var nextPoint = Selection.activeGameObject.GetComponent<Waypoint>();
-        waypoint.next.Add(nextPoint);
-        nextPoint.parent = waypoint;
-        Selection.activeGameObject = waypoint.gameObject;
-        nextPoint.transform.position = waypoint.transform.position;
-        nextPoint.transform.forward = waypoint.transform.forward*1.5f;
-        
-    }
-
-  
-
-    public static void DrawUILine(Color color, int thickness = 1, int padding = 20)
-    {
-        Rect r = EditorGUILayout.GetControlRect(GUILayout.Height(padding+thickness));
-        r.height = thickness;
-        r.y+=padding/2;
-        r.x-=2;
-        r.width +=6;
-        EditorGUI.DrawRect(r, color);
-    }
-
-    private int GetWaypointsCount()
-    {
-        return trafficSystemScript.GetWaypointsCount();
-    }
-
-    private void AddWaypoint(Waypoint waypoint)
-    {
-        trafficSystemScript.AddWaypoint(waypoint);
-    }
-
-    
-
-
+   
     
 }

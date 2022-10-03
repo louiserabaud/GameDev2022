@@ -54,17 +54,16 @@ public class TrafficLight : MonoBehaviour
         }
     }
 
-    void Update()
+    public bool IsRed()
     {
-        
+        if(color == LightColor.Red)
+            return true;
+        return false;
     }
 
     void OnTriggerEnter(Collider otherObjectCollider){
         var otherObject = otherObjectCollider.GetComponent<Collider>().gameObject;
-        if(color==LightColor.Red)
-        {
-            CrossedRedLight?.Invoke(otherObject.name);
-        }
+        
     }
   
 

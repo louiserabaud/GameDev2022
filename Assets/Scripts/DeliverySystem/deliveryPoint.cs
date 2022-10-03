@@ -17,6 +17,8 @@ public class deliveryPoint : MonoBehaviour
     private float minZ;
     private float maxZ;
 
+    //minimum Distance to pickUpPoint
+    public float minDist = 50.0f;
 
 
     void Start()
@@ -32,6 +34,10 @@ public class deliveryPoint : MonoBehaviour
         Vector3 deliveryPoint = houses[index].getPosition();
 
         //
+        if (Vector3.Distance(deliveryPoint, gameObject.GetComponent<pickUpPoint>().transform.position) < minDist)
+        {
+            defineBuilding();
+        }
 
     }
 

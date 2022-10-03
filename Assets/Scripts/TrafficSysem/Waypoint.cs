@@ -6,6 +6,7 @@ public class Waypoint : MonoBehaviour
 {
     public Waypoint parent=null;
     public List<Waypoint> next = new List<Waypoint>();
+    public Vector3 position;
     public int id;
     
     public Vector3 GetPosition()
@@ -18,9 +19,15 @@ public class Waypoint : MonoBehaviour
         return Vector3.Distance(GetPosition(),other);
     }
 
-    public void SetPosition(Vector3 position)
+    public void SetPosition(Vector3 pos)
     {
-        transform.position = position;
+       position = pos;
+    }
+
+    public void Display()
+    {
+        Debug.Log("Waypoint " + gameObject.name + " at position: "+ transform.position);
+        Debug.Log("Parent: \n" + parent);
     }
 
    

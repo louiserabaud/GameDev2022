@@ -6,7 +6,7 @@ using UnityEngine;
 public class TrafficSystem : MonoBehaviour
 {
     
-    private List<Waypoint> waypoints;
+    public List<Waypoint> waypoints;
     private List<Intersection> intersections;
 
     public static TrafficSystem Instance { get; private set; }
@@ -22,12 +22,12 @@ public class TrafficSystem : MonoBehaviour
         { 
             Instance = this; 
         }
+        waypoints= new List<Waypoint>();
+        GatherWaypoints();
     }
 
     private void Start()
     {
-        waypoints= new List<Waypoint>();
-        GatherWaypoints();
     }
       
     private void GatherWaypoints()
@@ -42,7 +42,7 @@ public class TrafficSystem : MonoBehaviour
 
     public List<Waypoint> GetWaypoints()
     {
-        return Waypoints.Duplicate(waypoints);
+        return waypoints;
     }
 
 }

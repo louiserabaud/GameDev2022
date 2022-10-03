@@ -23,6 +23,8 @@ public class Intersection : MonoBehaviour
         {
             light.SwitchColor();
         }
+        //let only one light green for traffic flow
+        
     }
 
     void UpdateGroupLight()

@@ -26,7 +26,7 @@ public class CarAIController : MonoBehaviour
 
     public float stoppingDistance = 1f;
     public float reachedTargetDistance = 10f;
-    private float sensorLenght =1.5f;
+    private float sensorLenght =2f;
 
     public List<Waypoint> path=null;
     public Waypoint currentTarget=null;

@@ -3081,6 +3081,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: d80c7433031fdee44bf3910c4b046ce7, type: 3}
   m_PrefabInstance: {fileID: 193800166}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &195967111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 195967112}
+  m_Layer: 0
+  m_Name: --------------------- (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &195967112
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195967111}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.373768, y: 1.7050512, z: 0.4161045}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &203913947
 GameObject:
   m_ObjectHideFlags: 0
@@ -3128,6 +3159,7 @@ MonoBehaviour:
   parent: {fileID: 299583726}
   next:
   - {fileID: 1688225086}
+  position: {x: 0, y: 0, z: 0}
   id: 0
 --- !u!1001 &206289924
 PrefabInstance:
@@ -3323,6 +3355,7 @@ MonoBehaviour:
   parent: {fileID: 1608131419}
   next:
   - {fileID: 647829936}
+  position: {x: 0, y: 0, z: 0}
   id: 0
 --- !u!4 &217685194
 Transform:
@@ -3490,6 +3523,7 @@ MonoBehaviour:
   parent: {fileID: 665125752}
   next:
   - {fileID: 1608131419}
+  position: {x: 0, y: 0, z: 0}
   id: 0
 --- !u!1001 &239577267
 PrefabInstance:
@@ -4267,6 +4301,7 @@ MonoBehaviour:
   parent: {fileID: 586221548}
   next:
   - {fileID: 203913949}
+  position: {x: 0, y: 0, z: 0}
   id: 0
 --- !u!4 &299583727
 Transform:
@@ -4463,6 +4498,10 @@ PrefabInstance:
     - target: {fileID: 237883900148526288, guid: 79345e8e5804cc147b861d1918b474ad, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 237883900148526288, guid: 79345e8e5804cc147b861d1918b474ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 237883900148625648, guid: 79345e8e5804cc147b861d1918b474ad, type: 3}
       propertyPath: m_RootOrder
@@ -5017,6 +5056,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: d80c7433031fdee44bf3910c4b046ce7, type: 3}
   m_PrefabInstance: {fileID: 375138257}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &386684427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 386684429}
+  - component: {fileID: 386684428}
+  m_Layer: 0
+  m_Name: Algs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &386684428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386684427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8246f808e4b9b46bb24d687ae2ae55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints: []
+--- !u!4 &386684429
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386684427}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -36.438942, y: 3.8193798, z: -0.7990453}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &392896227
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5645,6 +5729,7 @@ MonoBehaviour:
   parent: {fileID: 1688225086}
   next:
   - {fileID: 677767504}
+  position: {x: 0, y: 0, z: 0}
   id: 0
 --- !u!4 &462991815
 Transform:
@@ -6580,6 +6665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14584d588da7d944cbcb27eb9a6d768a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waypoints: []
 --- !u!4 &541532085
 Transform:
   m_ObjectHideFlags: 0
@@ -7179,6 +7265,7 @@ MonoBehaviour:
   parent: {fileID: 1628009312}
   next:
   - {fileID: 299583726}
+  position: {x: 0, y: 0, z: 0}
   id: 0
 --- !u!4 &586221549
 Transform:
@@ -8311,6 +8398,7 @@ MonoBehaviour:
   parent: {fileID: 217685193}
   next:
   - {fileID: 677767504}
+  position: {x: 0, y: 0, z: 0}
   id: 0
 --- !u!4 &647829937
 Transform:
@@ -8607,6 +8695,7 @@ MonoBehaviour:
   parent: {fileID: 1017271074}
   next:
   - {fileID: 231090403}
+  position: {x: 0, y: 0, z: 0}
   id: 0
 --- !u!4 &665125753
 Transform:
@@ -8655,6 +8744,7 @@ MonoBehaviour:
   parent: {fileID: 462991814}
   next:
   - {fileID: 1017271074}
+  position: {x: 0, y: 0, z: 0}
   id: 0
 --- !u!4 &677767505
 Transform:
@@ -8862,6 +8952,7 @@ MonoBehaviour:
   next:
   - {fileID: 1335541680}
   - {fileID: 1628009312}
+  position: {x: 0, y: 0, z: 0}
   id: 0
 --- !u!4 &695571994
 Transform:
@@ -13359,6 +13450,7 @@ MonoBehaviour:
   parent: {fileID: 677767504}
   next:
   - {fileID: 665125752}
+  position: {x: 0, y: 0, z: 0}
   id: 0
 --- !u!4 &1017271075
 Transform:
@@ -14202,6 +14294,7 @@ MonoBehaviour:
   parent: {fileID: 1335541680}
   next:
   - {fileID: 1688225086}
+  position: {x: 0, y: 0, z: 0}
   id: 0
 --- !u!4 &1104446967
 Transform:
@@ -16951,6 +17044,7 @@ MonoBehaviour:
   parent: {fileID: 1608131419}
   next:
   - {fileID: 695571993}
+  position: {x: 0, y: 0, z: 0}
   id: 0
 --- !u!4 &1317892791
 Transform:
@@ -17323,6 +17417,7 @@ MonoBehaviour:
   parent: {fileID: 695571993}
   next:
   - {fileID: 1104446966}
+  position: {x: 0, y: 0, z: 0}
   id: 0
 --- !u!4 &1335541681
 Transform:
@@ -20400,6 +20495,7 @@ MonoBehaviour:
   next:
   - {fileID: 1317892790}
   - {fileID: 217685193}
+  position: {x: 0, y: 0, z: 0}
   id: 0
 --- !u!4 &1608131420
 Transform:
@@ -20552,6 +20648,7 @@ MonoBehaviour:
   parent: {fileID: 695571993}
   next:
   - {fileID: 586221548}
+  position: {x: 0, y: 0, z: 0}
   id: 0
 --- !u!4 &1628009313
 Transform:
@@ -21335,6 +21432,7 @@ MonoBehaviour:
   parent: {fileID: 1104446966}
   next:
   - {fileID: 462991814}
+  position: {x: 0, y: 0, z: 0}
   id: 0
 --- !u!1001 &1691414025
 PrefabInstance:

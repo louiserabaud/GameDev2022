@@ -5,8 +5,8 @@ using System;
 
 public class TrafficLight : MonoBehaviour
 {
-    public static event Action<String> CrossedRedLight;
-    public static event Action OnGreenLight;
+    public static event Action CrossedRedLight;
+
 
     
 
@@ -50,7 +50,6 @@ public class TrafficLight : MonoBehaviour
         else
         {
             pointLight.color = new Color(0, 1, 0);
-            OnGreenLight?.Invoke();
         }
     }
 
@@ -61,9 +60,9 @@ public class TrafficLight : MonoBehaviour
         return false;
     }
 
-    void OnTriggerEnter(Collider otherObjectCollider){
-        var otherObject = otherObjectCollider.GetComponent<Collider>().gameObject;
-        
+    void OnTriggerEnter(Collider otherObject){
+        if(otherObject.GetComponent<Collider>().tag=="Player")
+            CrossedRedLight?.Invoke();
     }
   
 

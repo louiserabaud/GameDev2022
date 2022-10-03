@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-static public class Waypoints
-{
-    public static List<Waypoint> waypoints;
 
-    public static List<Waypoint> Duplicate(List<Waypoint> _waypoints)
+public class Waypoints
+{
+    public  List<Waypoint> waypoints;
+
+    public Waypoints(List<Waypoint> _waypoints)
     {
         List<Waypoint> waypoints = new List<Waypoint>();
         //make a deep copy of all points
@@ -24,11 +25,9 @@ static public class Waypoints
             currentWaypoint.parent = parent;
             parent.next.Add(currentWaypoint);
         }
-
-        return waypoints;
     }
 
-    public static Waypoint GetWaypoint(Vector3 position)
+    public Waypoint GetWaypoint(Vector3 position)
     {
         int index = FindIndex(position);
         if(index<=0)
@@ -36,7 +35,7 @@ static public class Waypoints
         return null;
     }
 
-    static int FindIndex(Vector3 position)
+   int FindIndex(Vector3 position)
     {
         int index=0;
         foreach(var waypoint in waypoints)

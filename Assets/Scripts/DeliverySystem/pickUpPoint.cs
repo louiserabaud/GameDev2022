@@ -14,10 +14,12 @@ public class pickUpPoint : MonoBehaviour
     private float minZ;
     private float maxZ;
 
+    public bool pickedUp;
 
     void Start()
     {
         deliverySystem.OnNewRound += defineBuilding;      //subscribed to OnNewRound
+        pickedUp = false;
     }
 
     public void defineBuilding()
@@ -32,35 +34,12 @@ public class pickUpPoint : MonoBehaviour
     {
         if (GUI.Button(new Rect(Screen.width / 2 - 50, 5, 100, 30), "pick-up order"))
         {
-            //save state variable
+            pickedUp = true;
         }
     }
-    /*
-    public void createPickUpLocation()
+
+    public bool getPickedUp()
     {
-        Debug.Log("Creating pickUp location...");
-
-
-        minX = transform.position.x - (length / 2);
-        maxX = transform.position.x + (length / 2);
-        minZ = transform.position.z - (length / 2);
-        maxZ = transform.position.z + (length / 2);
-
-        Vector3 pickUpPos = new Vector3(Random.Range(minX, maxX), 0, Random.Range(minZ, maxZ));
-        GameObject pickUpPoint = Instantiate(locatePrefab, pickUpPos, Quaternion.identity);
-        
-    }*/
-
-
-
-
-    /*
-
-    private void Awake()
-    {
-        //sound to make the player aware of the start of the mission
-        //_audioSource = GetComponent<AudioSource>();
-    }*/
-
-
+        return pickedUp;
+    }
 }

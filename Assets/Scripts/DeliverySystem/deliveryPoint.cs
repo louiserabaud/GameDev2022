@@ -10,6 +10,9 @@ public class deliveryPoint : MonoBehaviour
     //this is the prefab that will appear in random loccations
     public GameObject locatePrefab;
 
+    //Reference to pickUpPoint
+    public pickUpPoint _pickUpPoint;
+
     //variables to set the delivery parameters
     public float length;
     private float minX;
@@ -43,7 +46,7 @@ public class deliveryPoint : MonoBehaviour
 
     public void OnTriggerEnter()
     {
-        if (GUI.Button(new Rect(Screen.width / 2 - 50, 5, 100, 30), "deliver"))
+        if (GUI.Button(new Rect(Screen.width / 2 - 50, 5, 100, 30), "deliver") && (_pickUpPoint.getPickedUp() == true))
         {
             if (OnCompleted != null)
             {

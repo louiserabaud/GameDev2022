@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start(){
-        SwitchGameState(GameState.Menu);
+        SwitchGameState(GameState.Play);
     }
 
     private void SwitchGameState(GameState newState){

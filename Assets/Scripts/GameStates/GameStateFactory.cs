@@ -7,16 +7,17 @@ public class GameStateFactory
     /// </summary>
     /// <param name="gameState">State we want to create</param>
     /// <returns>The requested game state entity</returns>
+    private static GameStateEntity _currentState = null;
     public static void LoadState(GameState gameState)
     {
         switch (gameState)
         {
             case GameState.Menu:
-                MenuState.Instance.OnEnter();
+            _currentState =  new MenuState();
                 return;
 
             case GameState.Play:
-                PlayState.Instance.OnEnter();
+            _currentState = new PlayState();
                 return;
 
             default:

@@ -6,27 +6,26 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Vector3 offset;
-    public static  GameObject player;
-    public Transform target;
+    [SerializeField] private Transform target = null;
     [SerializeField] private float translateSpeed;
     [SerializeField] private float rotationSpeed;
 
 
-    public static GameObject GetPlayerObject(){
-        return player;
-    }
-
     
     private void Awake(){
-        //target = GameObject.Find("Player").transform;
         translateSpeed = 10;
         rotationSpeed=12;
-       //offset.x = 0;
-      // offset.y = 2;
+        offset = new Vector3(0f,1.6f,-8.0f);
     }
 
-    private void Start(){
-        //target = GameObject.Find("Player").transform;
+    private void SetOffset(float x, float y, float z)
+    {
+        offset = new Vector3(x,y,z);
+    }
+
+    public void SetCameraTarget(Transform _target)
+    {
+        target = _target;
     }
 
     private void FixedUpdate()

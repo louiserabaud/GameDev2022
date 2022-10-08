@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
+  
+
     private const string HORIZONTAL = "Horizontal";
     private const string VERTICAL = "Vertical";
 
@@ -44,6 +46,11 @@ public class CarController : MonoBehaviour
     public Transform GetCameraTarget()
     {
         return transform.Find("CameraTarget");
+    }
+
+    public Transform GetTransform()
+    {
+        return transform;
     }
 
 

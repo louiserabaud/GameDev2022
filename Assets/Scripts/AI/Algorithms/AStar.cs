@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
 public class AStar : MonoBehaviour
 {
     public List<Waypoint> waypoints;
@@ -15,4 +15,4 @@ public class AStar : MonoBehaviour
     {
         var openList = new Dictionary<float, Waypoint>();
     }
-}
+}*/

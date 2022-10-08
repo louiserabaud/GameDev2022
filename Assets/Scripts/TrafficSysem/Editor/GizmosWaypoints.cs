@@ -9,8 +9,16 @@ public static class GizmosWaypoints
     [DrawGizmo(GizmoType.NonSelected | GizmoType.Selected | GizmoType.Pickable)]
     public static void OnDrawSceneGizmo(Waypoint waypoint, GizmoType gizmoType)
     {
-        Gizmos.color = Color.blue;
+        Color color = Color.blue;
+        if(waypoint.GetTag() == "CarWaypoint")
+            {
+                Gizmos.color = Color.red;
+                color = Color.blue;
+            }
+        else
+            Gizmos.color = Color.blue;
         Gizmos.DrawSphere(waypoint.GetPosition(),0.5f);
+        DrawArrow.ForGizmo(waypoint.GetPosition(),waypoint.GetTransform().forward*6.0f,Color.red,2f);
 
         if(waypoint.next.Count>=1)
         {
@@ -20,10 +28,11 @@ public static class GizmosWaypoints
                 Gizmos.DrawLine(waypoint.transform.position, nextpoint.transform.position);
                 var p1 = waypoint.transform.position;
                 var p2 = nextpoint.transform.position;
-                var thickness = 3;
+                var thickness = 1;
                 /*#if UNITY_EDITOR //Check if running a build or in editor
                     Handles.DrawBezier(p1,p2,p1,p2, Color.green,null,thickness);
                 #endif*/
+                
             }
         }
     }

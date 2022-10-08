@@ -32,4 +32,9 @@ using UnityEngine;
             _camera.SetCameraTarget(_player.GetCameraTarget());
             Debug.Log("cam props");
         }
+
+        private void InitTrafficSystem()
+        {
+            TrafficSystem.Instance.GatherWaypoints();
+        }
     }

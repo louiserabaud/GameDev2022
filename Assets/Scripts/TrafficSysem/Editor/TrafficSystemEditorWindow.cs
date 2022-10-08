@@ -10,7 +10,7 @@ public class TrafficSystemEditorWindow : EditorWindow
 
    
   {
-    [MenuItem("Tools/Waypoint Editor")]
+    [MenuItem("Tools/Traffic System Editor")]
     public static void Open()
     {
         GetWindow<TrafficSystemEditorWindow>();
@@ -68,6 +68,11 @@ public class TrafficSystemEditorWindow : EditorWindow
             {
                 CreateIntersection();
             }
+            if(GUILayout.Button("Create a car npc position"))
+            {
+                AddCarPosition();
+            }
+
         }
     }
 
@@ -75,10 +80,13 @@ public class TrafficSystemEditorWindow : EditorWindow
     void CreateWaypoint()
     {
         GameObject waypointObject = new GameObject("Waypoint" + waypointCount,typeof(Waypoint));
-        waypointObject.transform.SetParent(trafficSystem.GetChild(0),false);
         Selection.activeGameObject = waypointObject;
+        waypointObject.transform.SetParent(trafficSystem.GetChild(0),false);
+        waypointObject.tag="Waypoint";
         waypointCount++;
     }
+
+
 
     void AddWaypointAfter()
     {
@@ -86,7 +94,8 @@ public class TrafficSystemEditorWindow : EditorWindow
         CreateWaypoint();
         Waypoint waypoint = Selection.activeGameObject.GetComponent<Waypoint>();
         waypoint.parent = parent;
-        waypoint.SetPosition(parent.GetPosition() + new Vector3(1,0,1));
+        waypoint.SetTransform(parent.GetTransform());
+        waypoint.SetPosition(parent.GetTransform().position*2.0f);
         if(parent.next.Count>0)
             {
                 waypoint.next = parent.next;
@@ -150,6 +159,17 @@ public class TrafficSystemEditorWindow : EditorWindow
         lights.tag="TrafficLight";
         return lights.GetComponent<TrafficLight>();
     }
+
+    void AddCarPosition()
+    {
+        CreateWaypoint();
+        var waypoint = Selection.activeGameObject;
+        waypoint.tag="CarWaypoint";
+        waypoint.name="CarWaypoint";
+
+    }
+
+
 
    
     

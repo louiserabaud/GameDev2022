@@ -24,10 +24,27 @@ public class Waypoint : MonoBehaviour
        position = pos;
     }
 
+    public void SetTransform(Transform _transform)
+    {
+       transform.position = _transform.position;
+       transform.forward = _transform.forward;
+       transform.rotation = _transform.rotation;
+    }
+
+    public string GetTag( )
+    {
+        return gameObject.tag;
+    }
+
     public void Display()
     {
         Debug.Log("Waypoint " + gameObject.name + " at position: "+ transform.position);
         Debug.Log("Parent: \n" + parent);
+    }
+
+    public Transform GetTransform()
+    {
+        return transform;
     }
 
    

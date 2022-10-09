@@ -14,6 +14,8 @@ public static class GizmosWaypoints
             {
                 Gizmos.color = Color.red;
                 Gizmos.DrawIcon(waypoint.GetPosition()+new Vector3(0.0f,1f,0.0f), "carIcon.png", true);
+                DrawArrow.ForGizmo(waypoint.GetPosition(),waypoint.GetTransform().forward*6.0f,Color.red,2f);
+
             }
         else
         {

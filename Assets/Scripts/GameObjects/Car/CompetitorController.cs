@@ -5,6 +5,6 @@ using UnityEngine;
 
 public class CompetitorController 
 {
-
+    
 
 }

@@ -25,8 +25,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         //get user inputs:
-        float acceleration = Input.GetAxis("Horizontal");
-        float steering = Input.GetAxis("Vertical");
+        float acceleration = Input.GetAxis("Vertical");
+        float steering = Input.GetAxis("Horizontal");
         bool breaking = Input.GetKey(KeyCode.Space);
         _carController.Brake(breaking);
         _carController.SetAccelerationAndSteering(acceleration,steering);

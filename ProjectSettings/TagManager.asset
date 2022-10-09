@@ -8,13 +8,12 @@ TagManager:
   - TrafficLight
   - Intersection
   - TrafficSystem
-  - carNPC
   - Car
-  - deliveryPrefab
-  - pickupPrefab
-  - carWaypoint
   - CarWaypoint
   - PlayerWaypoint
+  - Building
+  - PickupLocation
+  - DeliveryLocation
   layers:
   - Default
   - TransparentFX

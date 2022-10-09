@@ -30,13 +30,12 @@ public static class WaypointNavigator
     public static float GetAcceleration(Vector3 position, Waypoint target, Transform transform)
     {
         float acceleration = 1.0f;
-        if(CheckForTurn(position,target,transform))
-            acceleration=0f;
         return acceleration;
     }
 
     public static float GetSteering(Vector3 position, Waypoint target,Transform transform)
     {
+        var next = GetNextWaypoint(target);
         return GetAngleBetweenPositions(position,target.GetPosition(),transform);
     }
 

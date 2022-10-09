@@ -39,7 +39,7 @@ public static class WaypointNavigator
         return GetAngleBetweenPositions(position,target.GetPosition(),transform);
     }
 
-    private static bool CheckForTurn(Vector3 position, Waypoint target, Transform transform)
+    public static bool CheckForTurn(Vector3 position, Waypoint target, Transform transform)
     {
         if(target.next.Count>1 || target.next.Count<1)
             return true;

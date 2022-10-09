@@ -17,11 +17,12 @@ public class AIController : MonoBehaviour
     [SerializeField] private Status _status = Status.Driving;
    
     [SerializeField] private Waypoint _currentTarget=null;
-    [SerializeField] private float maxTargetDistance=0.5f;
-    [SerializeField] private float minTargetDistance=3.5f;
+    [SerializeField] private float maxTargetDistance=7.0f;
+    [SerializeField] private float minTargetDistance=7.0f;
 
     void Start()
     {
+        
        if(_currentTarget==null)
             FindAnchorWaypoint(0,20);
         if(_carController==null)
@@ -35,6 +36,8 @@ public class AIController : MonoBehaviour
     {
         if(_carController==null || _currentTarget==null)
             return;
+        float distance = Vector3.Distance(transform.position,_currentTarget.GetPosition());
+        Debug.Log(distance);
         CheckForBraking();
         //ApplyTransforms();
         if(_status==Status.Driving)
@@ -52,12 +55,12 @@ public class AIController : MonoBehaviour
     void MoveCar()
     {
         //default values
-        float acceleration = 1.0f;
-        float steering = 0.0f;
         float distance = Vector3.Distance(transform.position,_currentTarget.GetPosition());
-        acceleration = WaypointNavigator.GetAcceleration(transform.position,_currentTarget,transform);
-        steering = WaypointNavigator.GetSteering(transform.position,_currentTarget,transform);
-        Debug.Log(acceleration + " "+steering);
+        float acceleration = WaypointNavigator.GetAcceleration(transform.position,_currentTarget,transform);
+        float steering = WaypointNavigator.GetSteering(transform.position,_currentTarget,transform);
+        if(WaypointNavigator.CheckForTurn(transform.position,_currentTarget,transform) && distance<5.0f)
+            acceleration=-1.0f;
+        
         _carController.SetAccelerationAndSteering(acceleration,steering);
     }
 

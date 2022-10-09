@@ -9,11 +9,12 @@ public class Intersection : MonoBehaviour
     public List<TrafficLight> groupId2;
 
     public float lightsDuration = 8;
-
+  
     void Start()
     {
+        
         //UpdateGoup(groupId1);
-        SwitchLights(groupId1);
+        //SwitchLights(groupId1);
         InvokeRepeating("UpdateGroupLight", lightsDuration, lightsDuration);
     }
 

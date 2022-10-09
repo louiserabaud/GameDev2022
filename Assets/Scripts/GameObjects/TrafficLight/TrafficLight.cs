@@ -21,7 +21,7 @@ public class TrafficLight : MonoBehaviour
         horizontal
     }
 
-    public LightColor color;
+    public LightColor color=LightColor.Red;
     private Axis axis;
 
     public Light pointLight;
@@ -29,7 +29,6 @@ public class TrafficLight : MonoBehaviour
   
     void Awake()
     {
-        UpdateColor();
     }
 
     public void SwitchColor()

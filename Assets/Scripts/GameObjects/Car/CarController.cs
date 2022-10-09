@@ -5,10 +5,10 @@ using System.Collections.Generic;
 public class CarController : MonoBehaviour
 {
    #region Fields
-    private float speed;
+     private float speed;
     private float speedMax = 15f;
-    private float speedMin = -50f;
-    private float acceleration = 30f;
+    private float speedMin = -300f;
+    private float acceleration = 50f;
     private float brakeSpeed = 1000f;
     private float reverseSpeed = 30f;
     private float idleSlowdown = 10f;
@@ -68,7 +68,7 @@ public class CarController : MonoBehaviour
             // Turning
             if ((turnSpeed > 0 && turnAmount < 0) || (turnSpeed < 0 && turnAmount > 0)) {
                 // Changing turn direction
-                float minTurnAmount = 20f;
+                float minTurnAmount = 10f;
                 turnSpeed = turnAmount * minTurnAmount;
             }
             turnSpeed += turnAmount * turnSpeedAcceleration * Time.deltaTime;

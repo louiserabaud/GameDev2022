@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
+/*
 public static class WaypointNavigator 
 {
     
@@ -62,3 +62,5 @@ public static class WaypointNavigator
     }
 
 }
+
+*/

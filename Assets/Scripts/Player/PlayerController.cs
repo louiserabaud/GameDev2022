@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour
 
     private void LoadCar()
     {
-        var carObj = Instantiate(CarObjectsLoader.LoadModel("Jeep5"),transform.parent);
+        string modelPath = AssetDatabase.Cars.Get("Jeep5");
+        var carObj = Instantiate(Resources.Load (modelPath) as GameObject,transform.parent);
         carObj.transform.parent = transform;
         _carController = carObj.GetComponent<CarController>();
 
@@ -27,7 +28,7 @@ public class PlayerController : MonoBehaviour
         float acceleration = Input.GetAxis("Horizontal");
         float steering = Input.GetAxis("Vertical");
         bool breaking = Input.GetKey(KeyCode.Space);
-        _carController.SetBrake(breaking);
+        _carController.Brake(breaking);
         _carController.SetAccelerationAndSteering(acceleration,steering);
     }
 

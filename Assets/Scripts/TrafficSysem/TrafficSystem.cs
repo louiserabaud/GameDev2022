@@ -6,8 +6,8 @@ using UnityEngine;
 public class TrafficSystem : MonoBehaviour
 {
     
-    [SerializeField] List<Waypoint> _waypoints=null;
-    [SerializeField] List<Waypoint> _carWaypoints=null;
+    [SerializeField] List<Waypoint> _waypoints= new List<Waypoint>();
+    [SerializeField] List<Waypoint> _carObjects= new List<Waypoint>();
 
     public static TrafficSystem Instance { get; private set; }
 
@@ -26,19 +26,26 @@ public class TrafficSystem : MonoBehaviour
       
     public void GatherWaypoints()
     {
-        _waypoints= new List<Waypoint>();
-        foreach(Transform child in transform.GetChild(0).transform)
+     
+        foreach(Transform child in transform.Find("Waypoints").transform)
         {
-            Debug.Log(child.name);
-            _waypoints.Add(
-                child.GetComponent<Waypoint>()
-            );
+            _waypoints.Add(child.GetComponent<Waypoint>());
+        }
+
+        foreach(Transform child in transform.Find("Cars").transform)
+        {
+            _carObjects.Add(child.GetComponent<Waypoint>());
         }
     }
 
     public List<Waypoint> GetWaypoints()
     {
         return _waypoints;
+    }
+
+    public List<Waypoint> GetCars()
+    {
+        return _carObjects;
     }
 
 }

@@ -68,9 +68,9 @@ public class TrafficSystemEditorWindow : EditorWindow
             {
                 CreateIntersection();
             }
-            if(GUILayout.Button("Create a car npc position"))
+            if(GUILayout.Button("Add Car Position"))
             {
-                AddCarPosition();
+                AddRandomCar();
             }
 
         }
@@ -160,12 +160,14 @@ public class TrafficSystemEditorWindow : EditorWindow
         return lights.GetComponent<TrafficLight>();
     }
 
-    void AddCarPosition()
+    void AddRandomCar()
     {
         CreateWaypoint();
-        var waypoint = Selection.activeGameObject;
-        waypoint.tag="CarWaypoint";
-        waypoint.name="CarWaypoint";
+        var carObj = Selection.activeGameObject;
+        var carWaypoint = carObj.GetComponent<Waypoint>();
+        carObj.transform.SetParent(trafficSystem.transform.Find("Cars"),false);
+        carWaypoint.tag="CarWaypoint";
+        carWaypoint.name="CarWaypoint";
 
     }
 

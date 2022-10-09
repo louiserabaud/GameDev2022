@@ -1,20 +1,38 @@
 using UnityEngine;
-using System;
 using System.Collections.Generic;
+using System.Collections;
 
-public static class CarObjectsLoader
+namespace AssetDatabase
 {
-    private static Dictionary<string,string> _CarsDict =
-        new Dictionary<string,string>
-        {
-            {"Jeep5","Prefabs/CarObjects/Jeep5"}
-        };
-    private static string Jeep5 = "Prefabs/CarObjects/Jeep5";
-
-
-    public static GameObject LoadModel(string model)
+    public static class Cars
     {
-        
-        return Resources.Load<GameObject>(_CarsDict[model]);
+        private static Dictionary<string,string> _CarsDict =
+            new Dictionary<string,string>
+            {
+                {"Jeep5","Prefabs/CarObjects/Jeep5"}
+            };
+
+        public static string Get(string model)
+        {
+            return _CarsDict[model];
+        }
+
+        public static string GetRandom( )
+        {   string random= GetElementAtIndex(Random.Range(0,_CarsDict.Count));
+            return random;
+        }
+
+        public static string GetElementAtIndex(int randIndex)
+        {
+            int index = 0;
+            foreach(var model in _CarsDict)
+            {
+                if(index==randIndex)
+                    return model.Value;
+                index++;
+            }
+
+            return null;
+        }
     }
 }

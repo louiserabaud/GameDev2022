@@ -4,10 +4,7 @@ using UnityEngine;
 
 public static class CarFactory 
 {
-    static int ids=0;
-    public static int GetCarID()
-    {
-        ids++;
-        return ids;
-    }
+    public static List<GameObject> _carObjects=new List<GameObject>();
+
+   
 }

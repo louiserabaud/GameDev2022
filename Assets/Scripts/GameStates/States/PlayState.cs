@@ -17,6 +17,11 @@ using UnityEngine;
         {
             SetPlayerProperties();
             SetCameraProperties();
+            InitTrafficSystem();
+
+            /*Instantiate Game Objects */ 
+            InitRandomCars();
+
         }
 
         private void SetPlayerProperties()
@@ -30,11 +35,24 @@ using UnityEngine;
             Camera.main.gameObject.AddComponent<CameraController>();
             _camera = Camera.main.gameObject.GetComponent<CameraController>();
             _camera.SetCameraTarget(_player.GetCameraTarget());
-            Debug.Log("cam props");
         }
 
         private void InitTrafficSystem()
         {
             TrafficSystem.Instance.GatherWaypoints();
         }
+
+        private void InitRandomCars()
+        {
+            var carObjects= TrafficSystem.Instance.GetCars();
+            foreach(var carpos in carObjects)
+            {
+                string modelPath = AssetDatabase.Cars.GetRandom();
+                var carObj = Instantiate(Resources.Load(modelPath) as GameObject,carpos.GetTransform());
+                carObj.AddComponent<AIController>();
+                carObj.transform.SetParent(GameObject.Find("npcs").transform);
+                carObj.transform.parent=null;
+            }
+        }
+
     }

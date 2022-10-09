@@ -12,6 +12,8 @@ TagManager:
   - Car
   - deliveryPrefab
   - pickupPrefab
+  - carWaypoint
+  - CarWaypoint
   layers:
   - Default
   - TransparentFX

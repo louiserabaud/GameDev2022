@@ -26,7 +26,10 @@ using UnityEngine;
 
         private void SetPlayerProperties()
         {
+            var playerPosition = TrafficSystem.Instance.GetPlayerPosition();
             var playerObj = new GameObject("Player").AddComponent<PlayerController>();
+            playerObj.transform.position = playerPosition.position;
+            playerObj.transform.rotation = playerPosition.rotation;
            _player = playerObj.GetComponent<PlayerController>();
         }
 
@@ -50,6 +53,7 @@ using UnityEngine;
                 string modelPath = AssetDatabase.Cars.GetRandom();
                 var carObj = Instantiate(Resources.Load(modelPath) as GameObject,carpos.GetTransform());
                 carObj.AddComponent<AIController>();
+                carObj.tag="Car";
                 carObj.transform.SetParent(GameObject.Find("npcs").transform);
                 carObj.transform.parent=null;
             }

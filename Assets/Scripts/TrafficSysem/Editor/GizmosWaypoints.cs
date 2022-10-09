@@ -13,13 +13,15 @@ public static class GizmosWaypoints
         if(waypoint.GetTag() == "CarWaypoint")
             {
                 Gizmos.color = Color.red;
-                color = Color.blue;
+                Gizmos.DrawIcon(waypoint.GetPosition()+new Vector3(0.0f,1f,0.0f), "carIcon.png", true);
             }
         else
+        {
             Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(waypoint.GetPosition(),0.5f);
-        DrawArrow.ForGizmo(waypoint.GetPosition(),waypoint.GetTransform().forward*6.0f,Color.red,2f);
-
+            Gizmos.DrawIcon(waypoint.GetPosition()+new Vector3(0.0f,1f,0.0f), "WaypointIcon.png", true);
+            DrawArrow.ForGizmo(waypoint.GetPosition(),waypoint.GetTransform().forward*6.0f,Color.red,2f);
+        }
+         
         if(waypoint.next.Count>=1)
         {
             foreach(var nextpoint in waypoint.next)

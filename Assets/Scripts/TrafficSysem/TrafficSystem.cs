@@ -48,4 +48,9 @@ public class TrafficSystem : MonoBehaviour
         return _carObjects;
     }
 
+    public Transform GetPlayerPosition()
+    {
+        return transform.Find("PlayerWaypoint").gameObject.GetComponent<Waypoint>().GetTransform();
+    }
+
 }

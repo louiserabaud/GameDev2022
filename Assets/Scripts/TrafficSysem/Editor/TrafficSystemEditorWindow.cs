@@ -40,6 +40,11 @@ public class TrafficSystemEditorWindow : EditorWindow
         
         if(Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<Waypoint>())
         {
+            if(GUILayout.Button("Extrude Waypoint"))
+            {
+                ExtrudeWaypoint();
+            }
+
              if(GUILayout.Button("Create Waypoint after"))
             {
                 AddWaypointAfter();
@@ -47,15 +52,6 @@ public class TrafficSystemEditorWindow : EditorWindow
              if(GUILayout.Button("Remove Waypoint"))
             {
                // RemoveWaypoint();
-            }
-            if (GUILayout.Button("Add a new branch"))
-            {
-               AddBranch();
-            }
-
-             if (GUILayout.Button("Merge two Points"))
-            {
-                MergePoints();
             }
             
         }else
@@ -73,6 +69,11 @@ public class TrafficSystemEditorWindow : EditorWindow
                 AddRandomCar();
             }
 
+            if(GUILayout.Button("Set Player Position"))
+            {
+               AddPlayerPosition();
+            }
+
         }
     }
 
@@ -81,12 +82,27 @@ public class TrafficSystemEditorWindow : EditorWindow
     {
         GameObject waypointObject = new GameObject("Waypoint" + waypointCount,typeof(Waypoint));
         Selection.activeGameObject = waypointObject;
-        waypointObject.transform.SetParent(trafficSystem.GetChild(0),false);
+        waypointObject.transform.SetParent(trafficSystem.transform.Find("Waypoints"),false);
+        Selection.activeGameObject = waypointObject;
         waypointObject.tag="Waypoint";
+        waypointObject.AddComponent<SphereCollider>();
+        var collider = waypointObject.GetComponent<SphereCollider>();
+        collider.radius = 2.7f;
+        collider.isTrigger=true;
         waypointCount++;
     }
 
+    void ExtrudeWaypoint()
+    {
+        Waypoint parent = Selection.activeGameObject.GetComponent<Waypoint>();
+        CreateWaypoint();
+        Waypoint waypoint = Selection.activeGameObject.GetComponent<Waypoint>();
+        waypoint.parent = parent;
+        waypoint.SetTransform(parent.GetTransform());
+        waypoint.SetPosition(parent.GetTransform().position*1.05f);
+        parent.next.Add(waypoint);
 
+    }
 
     void AddWaypointAfter()
     {
@@ -94,40 +110,17 @@ public class TrafficSystemEditorWindow : EditorWindow
         CreateWaypoint();
         Waypoint waypoint = Selection.activeGameObject.GetComponent<Waypoint>();
         waypoint.parent = parent;
-        waypoint.SetTransform(parent.GetTransform());
-        waypoint.SetPosition(parent.GetTransform().position*2.0f);
-        if(parent.next.Count>0)
+        waypoint.SetPosition(parent.GetTransform().position);
+        foreach(var child in parent.next)
             {
-                waypoint.next = parent.next;
-                parent.next.Clear();
+                child.parent = waypoint;
+                waypoint.next.Add(child);
             }
+        parent.next.Clear();
         parent.next.Add(waypoint);
     }
 
-    void MergePoints()
-    {
-        if(!(Selection.transforms.Length!=2 && Selection.transforms[0].tag=="Waypoint" && Selection.transforms[1].tag=="Waypoint"))
-            {
-                Debug.Log("not enough or too many obj selected");
-                return;
-            }
-        Waypoint parentPoint = Selection.transforms[0].GetComponent<Waypoint>();
-        Waypoint childPoint = Selection.transforms[1].GetComponent<Waypoint>();
-
-        parentPoint.next.Add(childPoint);
-        childPoint.parent = parentPoint;
-    }
-
-    void AddBranch()
-    {
-        Waypoint parent = Selection.activeGameObject.GetComponent<Waypoint>();
-        CreateWaypoint();
-        Waypoint waypoint = Selection.activeGameObject.GetComponent<Waypoint>();
-        waypoint.parent = parent;
-        parent.next.Add(waypoint);
-        waypoint.SetPosition(parent.GetPosition()+ new Vector3(1,0,1));
-    }
-
+  
      void CreateIntersection()
     {
         var trafficLights = new List<TrafficLight>();
@@ -172,7 +165,15 @@ public class TrafficSystemEditorWindow : EditorWindow
     }
 
 
-
+    void  AddPlayerPosition()
+    {
+        CreateWaypoint();
+        var carObj = Selection.activeGameObject;
+        var carWaypoint = carObj.GetComponent<Waypoint>();
+        carObj.transform.SetParent(trafficSystem.transform,false);
+        carWaypoint.tag="PlayerWaypoint";
+        carWaypoint.name="PlayerWaypoint";
+    }
    
     
 }

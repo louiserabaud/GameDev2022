@@ -21,7 +21,7 @@ public class Waypoint : MonoBehaviour
 
     public void SetPosition(Vector3 pos)
     {
-       position = pos;
+       transform.position = pos;
     }
 
     public void SetTransform(Transform _transform)

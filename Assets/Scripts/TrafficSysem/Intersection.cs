@@ -14,7 +14,7 @@ public class Intersection : MonoBehaviour
     {
         
         //UpdateGoup(groupId1);
-        //SwitchLights(groupId1);
+        SwitchLights(groupId1);
         InvokeRepeating("UpdateGroupLight", lightsDuration, lightsDuration);
     }
 

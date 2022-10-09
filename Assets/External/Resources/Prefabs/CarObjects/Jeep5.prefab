@@ -552,7 +552,7 @@ GameObject:
   - component: {fileID: 5276825060916344624}
   m_Layer: 0
   m_Name: Jeep5
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -572,6 +572,7 @@ Transform:
   - {fileID: 5276825059928865823}
   - {fileID: 5276825060358375700}
   - {fileID: 5276825059704017375}
+  - {fileID: 261248768769558801}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -657,17 +658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d468ade602a02a47b54cd731a023e1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  motorForce: 100
-  breakForce: 100
-  maxSteerAngle: 10
-  frontLeftWheelCollider: {fileID: 5276825060452604707}
-  frontRightWheelCollider: {fileID: 5276825059918365494}
-  rearLeftWheelCollider: {fileID: 5276825060167855612}
-  rearRightWheelCollider: {fileID: 5276825061167157125}
-  frontLeftWheelTransform: {fileID: 5276825061395679025}
-  frontRightWheeTransform: {fileID: 5276825059880034704}
-  rearLeftWheelTransform: {fileID: 5276825060812674715}
-  rearRightWheelTransform: {fileID: 5276825060652641556}
+  sensorLenght: 10
 --- !u!65 &5276825060916344624
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -826,3 +817,34 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8626138394044286479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 261248768769558801}
+  m_Layer: 0
+  m_Name: FrontSensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &261248768769558801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8626138394044286479}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.001, y: 1.224, z: 2.642}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5276825060916344625}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

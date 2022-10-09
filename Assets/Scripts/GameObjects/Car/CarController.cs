@@ -6,9 +6,9 @@ public class CarController : MonoBehaviour
 {
    #region Fields
      private float speed;
-    private float speedMax = 15f;
+    private float speedMax = 10f;
     private float speedMin = -300f;
-    private float acceleration = 50f;
+    private float acceleration = 30f;
     private float brakeSpeed = 1000f;
     private float reverseSpeed = 30f;
     private float idleSlowdown = 10f;

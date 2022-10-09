@@ -17,7 +17,8 @@ public class AIController : MonoBehaviour
     [SerializeField] private Status _status = Status.Driving;
    
     [SerializeField] private Waypoint _currentTarget=null;
-    [SerializeField] private float maxTargetDistance=15f;
+    [SerializeField] private float maxTargetDistance=0.5f;
+    [SerializeField] private float minTargetDistance=3.5f;
 
     void Start()
     {
@@ -36,10 +37,11 @@ public class AIController : MonoBehaviour
             return;
         CheckForBraking();
         //ApplyTransforms();
-        if(WaypointNavigator.HasReachedDestination(transform.position,_currentTarget,maxTargetDistance))
-            _currentTarget = WaypointNavigator.GetNextWaypoint(_currentTarget);
         if(_status==Status.Driving)
             MoveCar();
+        if(WaypointNavigator.HasReachedDestination(transform.position,_currentTarget,maxTargetDistance))
+            _currentTarget = WaypointNavigator.GetNextWaypoint(_currentTarget);
+        
     }
 
     void ApplyTransforms()
@@ -53,11 +55,9 @@ public class AIController : MonoBehaviour
         float acceleration = 1.0f;
         float steering = 0.0f;
         float distance = Vector3.Distance(transform.position,_currentTarget.GetPosition());
-        Debug.Log(distance);
-        if(distance<= maxTargetDistance)
-        {
-            acceleration = WaypointNavigator.GetAcceleration(transform.position,_currentTarget,transform);
-        }
+        acceleration = WaypointNavigator.GetAcceleration(transform.position,_currentTarget,transform);
+        steering = WaypointNavigator.GetSteering(transform.position,_currentTarget,transform);
+        Debug.Log(acceleration + " "+steering);
         _carController.SetAccelerationAndSteering(acceleration,steering);
     }
 
@@ -95,6 +95,7 @@ public class AIController : MonoBehaviour
              hits = Physics.RaycastAll(transform.position, transform.forward, 100.0f);
              for (int i = 0; i < hits.Length; i++)
             {
+                Debug.Log(hits[i].collider.gameObject.transform.position);
                 if(hits[i].collider.tag=="Waypoint")
                     _currentTarget = hits[i].collider.gameObject.GetComponent<Waypoint>();
             }

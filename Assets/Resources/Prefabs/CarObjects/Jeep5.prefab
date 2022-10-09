@@ -658,7 +658,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d468ade602a02a47b54cd731a023e1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensorLenght: 10
+  horizontalInput: 0
+  verticalInput: 0
+  currentSteerAngle: 0
+  currentbreakForce: 0
+  isBreaking: 0
+  motorForce: 1000
+  breakForce: 3000
+  maxSteerAngle: 50
+  frontLeftWheelCollider: {fileID: 5276825060452604707}
+  frontRightWheelCollider: {fileID: 5276825059918365494}
+  rearLeftWheelCollider: {fileID: 5276825060167855612}
+  rearRightWheelCollider: {fileID: 5276825061167157125}
+  frontLeftWheelTransform: {fileID: 5276825061395679025}
+  frontRightWheeTransform: {fileID: 5276825059880034704}
+  rearLeftWheelTransform: {fileID: 5276825060812674715}
+  rearRightWheelTransform: {fileID: 5276825060652641556}
 --- !u!65 &5276825060916344624
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -134,7 +134,6 @@ public class AIController : MonoBehaviour
         for(int i=0;i<hits.Length;i++)
         {
             
-            
             if(hits[i].collider.tag =="Player"
                 || hits[i].collider.tag =="Car")
             {

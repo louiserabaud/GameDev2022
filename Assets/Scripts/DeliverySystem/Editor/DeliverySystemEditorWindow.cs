@@ -33,19 +33,24 @@ public class DeliverySystemEditorWindow : EditorWindow
 
     void DrawButtons()
     {
-        if(GUILayout.Button("Add Pickup Location"))
+        if(Selection.activeGameObject != null )
         {
-            AddPickupLocation();
-        }
-        if(GUILayout.Button("Add Delivery Location"))
-        {
-            AddDeliveryLocation();
+            if(GUILayout.Button("Add Pickup Location"))
+            {
+                AddPickupLocation();
+            }
+            if(GUILayout.Button("Add Delivery Location"))
+            {
+                AddDeliveryLocation();
+            }
         }
     }
 
     void AddPickupLocation()
     {
+        var location = Selection.activeGameObject;
         GameObject pickupObj = new GameObject("PickupLocation",typeof(PickupLocation));
+        pickupObj.transform.position = location.transform.position;
         pickupObj.transform.SetParent(deliverySystem.transform.Find("PickupLocations"),false);
         Selection.activeGameObject = pickupObj;
         //set tag of object
@@ -60,7 +65,9 @@ public class DeliverySystemEditorWindow : EditorWindow
 
     void AddDeliveryLocation()
     {
+        var location = Selection.activeGameObject;
         GameObject deliveryObj = new GameObject("DeliveryLocation",typeof(DeliveryLocation));
+        deliveryObj.transform.position = location.transform.position;
         deliveryObj.transform.SetParent(deliverySystem.transform.Find("DeliveryLocations"),false);
         Selection.activeGameObject = deliveryObj;
         //set tag of object

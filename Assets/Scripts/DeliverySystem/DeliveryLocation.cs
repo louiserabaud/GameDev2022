@@ -6,6 +6,7 @@ using System;
 public class DeliveryLocation : MonoBehaviour
 {
     public static Action<string> OnDeliver;
+    [SerializeField] private Waypoint _waypoint;
 
     public void SetTransform(Transform _transform)
     {
@@ -16,5 +17,10 @@ public class DeliveryLocation : MonoBehaviour
     public Vector3 GetPosition()
     {
         return transform.position;
+    }
+
+    public Transform GetTransform()
+    {
+        return transform;
     }
 }

@@ -7,8 +7,8 @@ public class DeliverySystem : MonoBehaviour
 {
     
     public static DeliverySystem Instance { get; private set; }
-    [SerializeField] private List<DeliveryLocation> _deliveryLocations=null;
-    [SerializeField] private List<PickupLocation> _pickupLocations=null;
+    [SerializeField] private List<DeliveryLocation> _deliveryLocations= new List<DeliveryLocation>();
+    [SerializeField] private List<PickupLocation> _pickupLocations=new List<PickupLocation>();
 
     [SerializeField] private bool isRunning = false;
 
@@ -24,10 +24,27 @@ public class DeliverySystem : MonoBehaviour
         }  
     }
 
+    public void Start()
+    {
+        GatherGameObjects();
+    }
+
     public void InitiateNewDelivery()
     {
-        if(isRunning==true)
+        if(isRunning==true || _deliveryLocations.Count<1 || _pickupLocations.Count<1)
             return;
+    }
+
+    private void GatherGameObjects()
+    {
+        foreach(Transform position in transform.Find("PickupLocations").transform)
+            {
+                _pickupLocations.Add(position.GetComponent<PickupLocation>());
+            }
+        foreach(Transform position in transform.Find("DeliveryLocations").transform)
+            {
+                _deliveryLocations.Add(position.GetComponent<DeliveryLocation>());
+            }
     }
 
     private void SetDeliveryLocations(List<DeliveryLocation> _locations)

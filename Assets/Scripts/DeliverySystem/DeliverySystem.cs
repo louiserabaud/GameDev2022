@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
 public class DeliverySystem : MonoBehaviour
 {
-    
+    public static System.Action OnDeliveryRequest;
+
     public static DeliverySystem Instance { get; private set; }
     [SerializeField] private List<DeliveryLocation> _deliveryLocations= new List<DeliveryLocation>();
     [SerializeField] private List<PickupLocation> _pickupLocations=new List<PickupLocation>();
@@ -29,10 +31,14 @@ public class DeliverySystem : MonoBehaviour
         GatherGameObjects();
     }
 
-    public void InitiateNewDelivery()
+    public void RequestNewDelivery()
     {
         if(isRunning==true || _deliveryLocations.Count<1 || _pickupLocations.Count<1)
             return;
+        
+        var random_pickUp = _pickupLocations[Random.Range(0,(_pickupLocations.Count)-1)];
+        var random_delivery = _deliveryLocations[Random.Range(0,(_deliveryLocations.Count)-1)];
+        OnDeliveryRequest?.Invoke();
     }
 
     private void GatherGameObjects()

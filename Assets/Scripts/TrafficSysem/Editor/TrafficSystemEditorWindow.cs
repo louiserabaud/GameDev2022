@@ -38,24 +38,37 @@ public class TrafficSystemEditorWindow : EditorWindow
     void DrawButtons()
     {
         
-        if(GUILayout.Button("Edit Roads"))
+        if(Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<Waypoint>())
+        {
+             if(GUILayout.Button("Extrude Waypoint"))
             {
-                EditorGUILayout.BeginVertical("box");
-                EditRoadWaypoints();
-                EditorGUILayout.EndVertical();
+                ExtrudeWaypoint();
             }
-             if(GUILayout.Button("Edit Random Cars Positions"))
+
+             if(GUILayout.Button("Create Waypoint after"))
             {
-                EditorGUILayout.BeginVertical("box");
-                EditCarPositionsWaypoints();
-                EditorGUILayout.EndVertical();
+                AddWaypointAfter();
+            }
+             if(GUILayout.Button("Remove Waypoint"))
+            {
+               // RemoveWaypoint();
+            }
+        }
+        else
+        {
+            if(GUILayout.Button("Create Waypoint"))
+            {
+                CreateWaypoint();
             }
             if(GUILayout.Button("Add Car Position"))
             {
-                EditorGUILayout.BeginVertical("box");
-                AddPlayerPosition();
-                EditorGUILayout.EndVertical();
+                AddRandomCar();
             }
+            if(GUILayout.Button("Set Player Position"))
+            {
+               AddPlayerPosition();
+            }
+        }
     }
 
 

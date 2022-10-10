@@ -10,4 +10,6 @@ public class Building : MonoBehaviour
         house
     }
     [SerializeField] private Construction _construction;
+
+    
 }

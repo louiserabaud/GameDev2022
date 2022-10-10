@@ -35,16 +35,11 @@ public class PlayInitState : PlayBaseState
     }
     private void InitRandomCars()
     {
-        /*var carObjects= TrafficSystem.Instance.GetCars();
-        foreach(var carpos in carObjects)
+        var carWaypoints= TrafficSystem.Instance.GetCars();
+        foreach(var waypoint in carWaypoints)
         {
-            string modelPath = AssetDatabase.Cars.GetRandom();
-            Car _car = new GameObject("Waypoint" + waypointCount,typeof(Car));
-            var carObj = Instantiate(Resources.Load(modelPath) as GameObject,carpos.GetTransform());
-            carObj.AddComponent<AIController>();
-            carObj.tag="Car";
-            carObj.transform.SetParent(GameObject.Find("npcs").transform);
-            carObj.transform.parent=null;
-        }*/
+            Car _car = new GameObject("Car",typeof(Car)).GetComponent<Car>();
+            _car.InitCarObject(waypoint.GetTransform());
+        }
     }
 }

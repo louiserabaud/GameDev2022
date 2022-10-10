@@ -5,14 +5,16 @@ using UnityEngine;
 
 public class AIController : MonoBehaviour
 {
+
+
     public enum Status
     {
         Driving,
         Stop
     }
+
     [SerializeField] private CarController _carController=null;
     //[SerializeField] private SensorControler _sensorController;
-    [SerializeField] private CompetitorController _competitorController;
 
     [SerializeField] private Status _status = Status.Driving;
     
@@ -26,6 +28,8 @@ public class AIController : MonoBehaviour
     [SerializeField] private Transform _frontSensor;
     [SerializeField] private float _sensorLength=5f;
 
+
+
     void Start()
     {
         if(_graph==null)
@@ -37,8 +41,8 @@ public class AIController : MonoBehaviour
         if(_frontSensor==null)
             _frontSensor = gameObject.transform.Find("FrontSensor");
          _carController.SetAccelerationAndSteering(1.0f,0.0f);
-
     }
+
 
     void CreateGraph()
     {
@@ -69,10 +73,12 @@ public class AIController : MonoBehaviour
         
     }
 
+
     void ApplyTransforms()
     {
         transform.position = _carController.GetTransform().position;
     }
+
 
     void MoveCar()
     {
@@ -86,6 +92,7 @@ public class AIController : MonoBehaviour
         _carController.SetAccelerationAndSteering(acceleration,steering);
     }
 
+
     bool CheckForBraking()
     {
         if(_status == Status.Stop)
@@ -95,9 +102,6 @@ public class AIController : MonoBehaviour
         }
         return false;
     }
-
-    
-
 
     public Transform GetTransform()
     {

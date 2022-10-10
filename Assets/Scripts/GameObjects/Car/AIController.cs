@@ -15,8 +15,10 @@ public class AIController : MonoBehaviour
     [SerializeField] private CompetitorController _competitorController;
 
     [SerializeField] private Status _status = Status.Driving;
-   
-    [SerializeField] private Waypoint _currentTarget=null;
+    
+    private Graph _graph;
+    [SerializeField] private Node  _currentTarget=null;
+
     [SerializeField] private float maxTargetDistance=7.0f;
     [SerializeField] private float minTargetDistance=7.0f;
 
@@ -26,7 +28,8 @@ public class AIController : MonoBehaviour
 
     void Start()
     {
-        
+        if(_graph==null)
+            CreateGraph();
        if(_currentTarget==null)
             FindAnchorWaypoint(0,20);
         if(_carController==null)
@@ -35,6 +38,11 @@ public class AIController : MonoBehaviour
             _frontSensor = gameObject.transform.Find("FrontSensor");
          _carController.SetAccelerationAndSteering(1.0f,0.0f);
 
+    }
+
+    void CreateGraph()
+    {
+        _graph = new Graph(TrafficSystem.Instance.GetWaypoints());
     }
 
 
@@ -51,13 +59,13 @@ public class AIController : MonoBehaviour
             return;
         }
        
-        float distance = Vector3.Distance(transform.position,_currentTarget.GetPosition());
+        float distance = Vector3.Distance(transform.position,_currentTarget.position);
         CheckForBraking();
         //ApplyTransforms();
         if(_status==Status.Driving)
             MoveCar();
         if(WaypointNavigator.HasReachedDestination(transform.position,_currentTarget,maxTargetDistance))
-            _currentTarget = WaypointNavigator.GetNextWaypoint(_currentTarget);
+            _currentTarget = WaypointNavigator.GetNextTarget(_currentTarget);
         
     }
 
@@ -69,7 +77,7 @@ public class AIController : MonoBehaviour
     void MoveCar()
     {
         //default values
-        float distance = Vector3.Distance(transform.position,_currentTarget.GetPosition());
+        float distance = Vector3.Distance(transform.position,_currentTarget.position);
         float acceleration = WaypointNavigator.GetAcceleration(transform.position,_currentTarget,transform);
         float steering = WaypointNavigator.GetSteering(transform.position,_currentTarget,transform);
         if(WaypointNavigator.CheckForTurn(transform.position,_currentTarget,transform) && distance<5.0f)
@@ -108,11 +116,16 @@ public class AIController : MonoBehaviour
              var destination = transform.position + addDistanceToDirection;
              Debug.DrawRay(transform.position, addDistanceToDirection, Color.red, 10.0f);
              transform.LookAt(destination);
+             
              hits = Physics.RaycastAll(transform.position, transform.forward, 100.0f);
              for (int i = 0; i < hits.Length; i++)
             {
                 if(hits[i].collider.tag=="Waypoint")
-                    _currentTarget = hits[i].collider.gameObject.GetComponent<Waypoint>();
+                {
+                    Waypoint waypoint = hits[i].collider.gameObject.GetComponent<Waypoint>();
+                    _currentTarget = _graph.GetNodeFromWaypoint(waypoint);
+                }
+
             }
      }
 

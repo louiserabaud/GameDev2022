@@ -24,6 +24,11 @@ public class Waypoint : MonoBehaviour
        transform.position = pos;
     }
 
+    public Node ToNode()
+    {
+        return new Node(transform.position,transform);
+    }
+
     public void SetTransform(Transform _transform)
     {
        transform.position = _transform.position;

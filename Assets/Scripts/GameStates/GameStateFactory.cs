@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameStateFactory
+public class GameStateFactory : MonoBehaviour
 {
     
     public static void LoadState(GameState gameState)
@@ -14,7 +14,7 @@ public class GameStateFactory
                 return;
 
             case GameState.Play:
-            Resources.Load<GameObject>("Managers/PlayStateManager").GetComponent<PlayStateManager>();
+                Instantiate(Resources.Load<GameObject>("Managers/PlayStateManager")).GetComponent<PlayStateManager>();
                 return;
 
             default:

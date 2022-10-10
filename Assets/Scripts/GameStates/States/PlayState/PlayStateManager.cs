@@ -17,6 +17,8 @@ public class PlayStateManager : MonoBehaviour
 
     void Start()
     {
+        TrafficSystem.Instance.GatherWaypoints();
+
         currentState = initState;
         currentState.OnEnter(this);
     }

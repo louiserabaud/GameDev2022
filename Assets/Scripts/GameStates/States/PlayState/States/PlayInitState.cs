@@ -12,7 +12,7 @@ public class PlayInitState : PlayBaseState
     }
     public override void OnUpdate(PlayStateManager manager)
     {
-
+        //manager.SwitchState(manager.drivingState);
     }
     public override void OnExit(PlayStateManager manager)
     {

@@ -7,8 +7,17 @@ public class Competitor : MonoBehaviour
 {
 
     private GameObject carObject;
+    [SerializeField] private Waypoint pickUpLocation;
+    [SerializeField] private Waypoint deliveryLocation;
 
-    public void InitCarObject(Transform transform,GameObject model=null)
+    public void StartChase(Waypoint start, Waypoint end)
+    {
+        pickUpLocation = start;
+        deliveryLocation = end;
+        InitCarObject(start.GetTransform());
+    }
+
+    private void InitCarObject(Transform transform,GameObject model=null)
     {
         if(model==null)
             {
@@ -19,5 +28,13 @@ public class Competitor : MonoBehaviour
         carObject.AddComponent<AIController>();
         gameObject.tag="Car";
     }
+
+    private void Update()
+    {
+        if(carObject==null || pickUpLocation==null || deliveryLocation==null)
+            return;
+    }
+
+
 
 }

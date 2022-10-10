@@ -35,7 +35,7 @@ public class PlayInitState : PlayBaseState
     }
     private void InitRandomCars()
     {
-        var carObjects= TrafficSystem.Instance.GetCars();
+        /*var carObjects= TrafficSystem.Instance.GetCars();
         foreach(var carpos in carObjects)
         {
             string modelPath = AssetDatabase.Cars.GetRandom();
@@ -45,6 +45,6 @@ public class PlayInitState : PlayBaseState
             carObj.tag="Car";
             carObj.transform.SetParent(GameObject.Find("npcs").transform);
             carObj.transform.parent=null;
-        }
+        }*/
     }
 }

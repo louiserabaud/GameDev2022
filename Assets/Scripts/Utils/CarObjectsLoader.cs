@@ -9,7 +9,8 @@ namespace AssetDatabase
         private static Dictionary<string,string> _CarsDict =
             new Dictionary<string,string>
             {
-                {"Jeep5","Prefabs/CarObjects/Jeep5"}
+                {"Jeep5","Prefabs/CarObjects/Jeep5"},
+                {"Car4","Prefabs/CarObjects/Car4"}
             };
 
         public static string Get(string model)

@@ -11,7 +11,8 @@ namespace AssetDatabase
             {
                 {"Jeep5","Prefabs/CarObjects/Jeep5"},
                 {"Car4","Prefabs/CarObjects/Car4"},
-                {"Jeep1","Prefabs/CarObjects/Jeep1"}
+                {"Jeep1","Prefabs/CarObjects/Jeep1"},
+                {"SportCar3","Prefabs/CarObjects/SportCar3"}
             };
 
         public static string Get(string model)

@@ -8,7 +8,7 @@ using System;
 
 public class DeliverySystemEditorWindow : EditorWindow
 {
-    [MenuItem("Tools/Delivery System Editor")]
+    [MenuItem("Tools/UberBeats/Delivery System Editor")]
     public static void Open()
     {
         GetWindow<DeliverySystemEditorWindow>();

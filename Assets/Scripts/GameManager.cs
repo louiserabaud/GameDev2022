@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
             Instance = this; 
         }  
         //register to switch state event   
-        GameStateEntity.SwitchState += SwitchGameState;
+        GameBaseState.SwitchState += SwitchGameState;
     }
 
     private void Start(){

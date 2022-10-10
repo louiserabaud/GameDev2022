@@ -10,21 +10,21 @@ public class TrafficSystemEditorWindow : EditorWindow
 
    
   {
-    [MenuItem("Tools/Traffic System Editor")]
+    [MenuItem("Tools/UberBeats/Traffic System Editor")]
     public static void Open()
     {
         GetWindow<TrafficSystemEditorWindow>();
     }
     
-    public Transform trafficSystem;
+    public Transform TrafficSystem;
     public int waypointCount=0;
     public int intersectionCount=0;
 
     private void OnGUI() 
     {
         SerializedObject obj = new SerializedObject(this);
-        EditorGUILayout.PropertyField(obj.FindProperty("trafficSystem"));
-        if(trafficSystem==null)
+        EditorGUILayout.PropertyField(obj.FindProperty("TrafficSystem"));
+        if(TrafficSystem==null)
         {
             EditorGUILayout.HelpBox("Root transform must be selected.Please assign a root transform.",MessageType.Warning);
         }else{
@@ -38,9 +38,32 @@ public class TrafficSystemEditorWindow : EditorWindow
     void DrawButtons()
     {
         
+        if(GUILayout.Button("Edit Roads"))
+            {
+                EditorGUILayout.BeginVertical("box");
+                EditRoadWaypoints();
+                EditorGUILayout.EndVertical();
+            }
+             if(GUILayout.Button("Edit Random Cars Positions"))
+            {
+                EditorGUILayout.BeginVertical("box");
+                EditCarPositionsWaypoints();
+                EditorGUILayout.EndVertical();
+            }
+            if(GUILayout.Button("Add Car Position"))
+            {
+                EditorGUILayout.BeginVertical("box");
+                AddPlayerPosition();
+                EditorGUILayout.EndVertical();
+            }
+    }
+
+
+    void EditRoadWaypoints()
+    {
         if(Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<Waypoint>())
         {
-            if(GUILayout.Button("Extrude Waypoint"))
+             if(GUILayout.Button("Extrude Waypoint"))
             {
                 ExtrudeWaypoint();
             }
@@ -53,28 +76,30 @@ public class TrafficSystemEditorWindow : EditorWindow
             {
                // RemoveWaypoint();
             }
-            
-        }else
+        }
+        else
         {
             if(GUILayout.Button("Create Waypoint"))
             {
                 CreateWaypoint();
             }
-             if(GUILayout.Button("Create an Intersection"))
-            {
-                CreateIntersection();
-            }
-            if(GUILayout.Button("Add Car Position"))
+        }
+    }
+
+    void EditCarPositionsWaypoints()
+    {
+         if(GUILayout.Button("Add Car Position"))
             {
                 AddRandomCar();
             }
+    }
 
-            if(GUILayout.Button("Set Player Position"))
+    void EditPlayerPositionsWaypoints()
+    {
+         if(GUILayout.Button("Set Player Position"))
             {
                AddPlayerPosition();
             }
-
-        }
     }
 
     
@@ -82,7 +107,7 @@ public class TrafficSystemEditorWindow : EditorWindow
     {
         GameObject waypointObject = new GameObject("Waypoint" + waypointCount,typeof(Waypoint));
         Selection.activeGameObject = waypointObject;
-        waypointObject.transform.SetParent(trafficSystem.transform.Find("Waypoints"),false);
+        waypointObject.transform.SetParent(TrafficSystem.transform.Find("Waypoints"),false);
         Selection.activeGameObject = waypointObject;
         waypointObject.tag="Waypoint";
         waypointObject.AddComponent<SphereCollider>();
@@ -132,7 +157,7 @@ public class TrafficSystemEditorWindow : EditorWindow
             new Vector3(5,0,3)
         };
         var intersection = new GameObject("Intersection " + intersectionCount,typeof(Intersection));
-        intersection.transform.SetParent(trafficSystem.GetChild(1),false);
+        intersection.transform.SetParent(TrafficSystem.GetChild(1),false);
         intersection.gameObject.tag = "Intersection";
         intersection.gameObject.transform.position = new Vector3(0,0,0);
         for(int i=0;i<4;i++)
@@ -158,7 +183,7 @@ public class TrafficSystemEditorWindow : EditorWindow
         CreateWaypoint();
         var carObj = Selection.activeGameObject;
         var carWaypoint = carObj.GetComponent<Waypoint>();
-        carObj.transform.SetParent(trafficSystem.transform.Find("Cars"),false);
+        carObj.transform.SetParent(TrafficSystem.transform.Find("Cars"),false);
         carWaypoint.tag="CarWaypoint";
         carWaypoint.name="CarWaypoint";
 
@@ -170,7 +195,7 @@ public class TrafficSystemEditorWindow : EditorWindow
         CreateWaypoint();
         var carObj = Selection.activeGameObject;
         var carWaypoint = carObj.GetComponent<Waypoint>();
-        carObj.transform.SetParent(trafficSystem.transform,false);
+        carObj.transform.SetParent(TrafficSystem.transform,false);
         carWaypoint.tag="PlayerWaypoint";
         carWaypoint.name="PlayerWaypoint";
     }

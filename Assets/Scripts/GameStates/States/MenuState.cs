@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
  
 
- public class MenuState : GameStateEntity
+ public class MenuState : GameBaseState
     {
             
         public static MenuState Instance;

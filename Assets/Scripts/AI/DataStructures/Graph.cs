@@ -69,8 +69,11 @@ public static  class Graph
     {
         List<Node> path = new List<Node>();
         Node currentNode = end;
+        int i = 0;
         while(currentNode.parent!=null)
         {
+           /*Debug.Log(i + " " +currentNode.position);
+           Debug.Log(i + " paRENT: " +currentNode.parent.position);*/
             //get duplicate of current node
             Node clone =  FindNodeInList(currentNode,path);
             Node parent = currentNode.parent.Duplicate();
@@ -81,6 +84,8 @@ public static  class Graph
                 }
             parent.next.Add(clone);
             clone.parent = parent;
+            currentNode = currentNode.parent;
+            i++;
         }
         return path[path.Count-1];
     }

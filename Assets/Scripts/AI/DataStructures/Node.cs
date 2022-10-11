@@ -7,6 +7,14 @@ using UnityEngine;
 
 public class Node
 {
+    public Vector3 position;
+    public Transform transform;
+
+    public float cost;
+
+    public List<Node> next= new List<Node>();
+    public Node parent=null;
+
     public Node(Vector3 _position, Transform _transform)
     {
         position=_position;
@@ -23,13 +31,7 @@ public class Node
         newNode.parent = parent;
        return newNode;
     }
-    public Vector3 position;
-    public Transform transform;
-
-    public float cost;
-
-    public List<Node> next= new List<Node>();
-    public Node parent=null;
+  
 
     
    public  bool Equals(Node other)

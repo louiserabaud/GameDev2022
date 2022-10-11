@@ -14,9 +14,9 @@ public static class AStar
 {
     public static Node FindShortestPath(List<Node> nodes, Node start, Node end)
     {
+       
         List<Node> openList = new List<Node>();
         List<Node> closedList = new List<Node>();
-
         foreach(var node in nodes)
         {
             node.cost = float.MaxValue;
@@ -30,7 +30,10 @@ public static class AStar
         {
             Node currentNode = GetMinValue(openList);
             if(currentNode.Equals(end))
-                return Graph.Backtrack(currentNode);
+                {
+                    return Graph.Backtrack(currentNode);
+                }
+                
 
             if (currentNode != null)
             {

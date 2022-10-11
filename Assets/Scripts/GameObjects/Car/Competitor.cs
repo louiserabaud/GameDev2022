@@ -31,7 +31,7 @@ public class Competitor : MonoBehaviour
                 _car = car.GetComponent<Car>();
             }
         
-       // _car.GetAIController().SetCurrentTarget(FindShortestPath());
+        _car.GetAIController().SetCurrentTarget(FindShortestPath());
     }
 
     private Node FindShortestPath()

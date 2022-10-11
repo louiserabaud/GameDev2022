@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class DeliverySystem : MonoBehaviour
 {
-    public static System.Action OnDeliveryRequest;
+    public static System.Action<DeliveryData> OnDeliveryRequest;
+    public static System.Action<DeliveryData> OnAcceptDelivery;
 
     public static DeliverySystem Instance { get; private set; }
     [SerializeField] private List<DeliveryLocation> _deliveryLocations= new List<DeliveryLocation>();
@@ -24,21 +25,19 @@ public class DeliverySystem : MonoBehaviour
         { 
             Instance = this; 
         }  
-    }
-
-    public void Start()
-    {
         GatherGameObjects();
     }
+
 
     public void RequestNewDelivery()
     {
         if(isRunning==true || _deliveryLocations.Count<1 || _pickupLocations.Count<1)
             return;
-        
         var random_pickUp = _pickupLocations[Random.Range(0,(_pickupLocations.Count)-1)];
         var random_delivery = _deliveryLocations[Random.Range(0,(_deliveryLocations.Count)-1)];
-        OnDeliveryRequest?.Invoke();
+        DeliveryData newDelivery = new DeliveryData(random_pickUp,random_delivery);
+        OnDeliveryRequest?.Invoke(newDelivery);
+        OnAcceptDelivery?.Invoke(newDelivery);
     }
 
     private void GatherGameObjects()

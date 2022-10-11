@@ -12,7 +12,7 @@ public class PlayInitState : PlayBaseState
     }
     public override void OnUpdate(PlayStateManager manager)
     {
-        //manager.SwitchState(manager.drivingState);
+       manager.SwitchState(manager.drivingState);
     }
     public override void OnExit(PlayStateManager manager)
     {
@@ -35,11 +35,11 @@ public class PlayInitState : PlayBaseState
     }
     private void InitRandomCars()
     {
-        var carWaypoints= TrafficSystem.Instance.GetCars();
+       /* var carWaypoints= TrafficSystem.Instance.GetCars();
         foreach(var waypoint in carWaypoints)
         {
             Car _car = new GameObject("Car",typeof(Car)).GetComponent<Car>();
             _car.InitCarObject(waypoint.GetTransform());
-        }
+        }*/
     }
 }

@@ -23,4 +23,9 @@ public class PickupLocation : MonoBehaviour
     {
         return transform;
     }
+
+    public Waypoint GetClosestWaypoint()
+    {
+        return _waypoint;
+    }
 }

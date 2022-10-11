@@ -9,11 +9,10 @@ using UnityEngine;
 
 public class PlayStateManager : MonoBehaviour
 {
-    PlayBaseState currentState;
-    PlayInitState initState = new PlayInitState();
-    PlayAcceptDeliveryState acceptDeliveryState = new PlayAcceptDeliveryState();
-    PlayDrivingState drivingState = new PlayDrivingState();
-
+    public PlayBaseState currentState;
+    public PlayInitState initState = new PlayInitState();
+    public PlayAcceptDeliveryState acceptDeliveryState = new PlayAcceptDeliveryState();
+    public PlayDrivingState drivingState = new PlayDrivingState();
 
     void Start()
     {
@@ -28,7 +27,7 @@ public class PlayStateManager : MonoBehaviour
         currentState.OnUpdate(this);
     }
 
-    void SwitchState(PlayBaseState state)
+    public void SwitchState(PlayBaseState state)
     {
         currentState = state;
         currentState.OnEnter(this);

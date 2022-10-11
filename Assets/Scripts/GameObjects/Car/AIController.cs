@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class AIController : MonoBehaviour
 {
-
-
     public enum Status
     {
         Driving,
@@ -18,7 +16,7 @@ public class AIController : MonoBehaviour
 
     [SerializeField] private Status _status = Status.Driving;
     
-    private Graph _graph;
+   
     [SerializeField] private Node  _currentTarget=null;
 
     [SerializeField] private float maxTargetDistance=7.0f;
@@ -29,11 +27,9 @@ public class AIController : MonoBehaviour
     [SerializeField] private float _sensorLength=5f;
 
 
-
+    
     void Start()
     {
-        if(_graph==null)
-            CreateGraph();
        if(_currentTarget==null)
             FindAnchorWaypoint(0,20);
         if(_carController==null)
@@ -43,11 +39,16 @@ public class AIController : MonoBehaviour
          _carController.SetAccelerationAndSteering(1.0f,0.0f);
     }
 
-
-    void CreateGraph()
+    public void SetCurrentWaypoint(Waypoint currentposition)
     {
-        _graph = new Graph(TrafficSystem.Instance.GetWaypoints());
+        _currentTarget = Graph.GetNodeFromWaypoint(currentposition,TrafficSystem.Instance.GetWaypoints());
     }
+
+    public void SetCurrentTarget(Node start)
+    {
+        _currentTarget = start;
+    }
+
 
 
 
@@ -111,6 +112,8 @@ public class AIController : MonoBehaviour
 
     public void FindAnchorWaypoint(float degrees, float distance)
       {
+        if(_currentTarget!=null)
+            return;
             RaycastHit[] hits;
              // local coordinate rotation around the Y axis to the given angle
              Quaternion rotation = Quaternion.AngleAxis(degrees, Vector3.up);        
@@ -127,7 +130,7 @@ public class AIController : MonoBehaviour
                 if(hits[i].collider.tag=="Waypoint")
                 {
                     Waypoint waypoint = hits[i].collider.gameObject.GetComponent<Waypoint>();
-                    _currentTarget = _graph.GetNodeFromWaypoint(waypoint);
+                    _currentTarget = Graph.GetNodeFromWaypoint(waypoint,TrafficSystem.Instance.GetWaypoints());
                 }
 
             }

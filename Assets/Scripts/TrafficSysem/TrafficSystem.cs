@@ -7,7 +7,7 @@ public class TrafficSystem : MonoBehaviour
 {
     
     [SerializeField] List<Waypoint> _waypoints= new List<Waypoint>();
-    [SerializeField] List<Waypoint> _carObjects= new List<Waypoint>();
+    [SerializeField] List<Car> _cars= new List<Car>();
 
     public static TrafficSystem Instance { get; private set; }
 
@@ -34,7 +34,7 @@ public class TrafficSystem : MonoBehaviour
 
         foreach(Transform child in transform.Find("Cars").transform)
         {
-            _carObjects.Add(child.GetComponent<Waypoint>());
+            _cars.Add(child.GetComponent<Car>());
         }
     }
 
@@ -43,9 +43,9 @@ public class TrafficSystem : MonoBehaviour
         return _waypoints;
     }
 
-    public List<Waypoint> GetCars()
+    public List<Car> GetCars()
     {
-        return _carObjects;
+        return _cars;
     }
 
     public Transform GetPlayerPosition()

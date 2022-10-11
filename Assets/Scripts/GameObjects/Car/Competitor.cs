@@ -6,33 +6,56 @@ using UnityEngine;
 public class Competitor : MonoBehaviour
 {
 
-    private GameObject carObject;
-    [SerializeField] private Waypoint pickUpLocation;
-    [SerializeField] private Waypoint deliveryLocation;
+    public Car _car;
+    [SerializeField] private PickupLocation pickUpLocation;
+    [SerializeField] private DeliveryLocation deliveryLocation;
 
-    public void StartChase(Waypoint start, Waypoint end)
+
+
+    public void StartChase(PickupLocation start, DeliveryLocation end)
     {
         pickUpLocation = start;
         deliveryLocation = end;
-        InitCarObject(start.GetTransform());
+        ApplyTransform(pickUpLocation.GetTransform());
+        InitCarObject(pickUpLocation.GetClosestWaypoint());
     }
 
-    private void InitCarObject(Transform transform,GameObject model=null)
+    private void InitCarObject(Waypoint waypoint,GameObject model=null)
     {
+        Debug.Log("init car");
         if(model==null)
             {
-                string modelPath = AssetDatabase.Cars.GetRandom();
-                carObject = Instantiate(Resources.Load(modelPath) as GameObject,transform);  
+                GameObject car = new GameObject("Car",typeof(Car));
+                car.transform.SetParent(transform,false);
+                car.tag="Competitor";
+                _car = car.GetComponent<Car>();
             }
-            
-        carObject.AddComponent<AIController>();
-        gameObject.tag="Car";
+        
+       // _car.GetAIController().SetCurrentTarget(FindShortestPath());
+    }
+
+    private Node FindShortestPath()
+    {
+        return AI.AlgorithmManager.FindShortestPath(
+            AI.Algorithm.AStar,
+            pickUpLocation.GetClosestWaypoint(),
+            deliveryLocation.GetClosestWaypoint(),
+            TrafficSystem.Instance.GetWaypoints()
+            );
+    }
+
+    private void ApplyTransform(Transform _transform)
+    {
+        transform.position = _transform.position;
+        transform.rotation = _transform.rotation;
     }
 
     private void Update()
     {
-        if(carObject==null || pickUpLocation==null || deliveryLocation==null)
+        if(_car==null || pickUpLocation==null || deliveryLocation==null)
             return;
+        ApplyTransform(_car.transform);
+        
     }
 
 

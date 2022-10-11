@@ -14,6 +14,7 @@ TagManager:
   - Building
   - PickupLocation
   - DeliveryLocation
+  - Competitor
   layers:
   - Default
   - TransparentFX

@@ -1,7 +1,7 @@
 using UnityEngine;
 
  
-
+/*
     public class PlayState : GameBaseState
     {
         private PlayerController _player;
@@ -20,9 +20,9 @@ using UnityEngine;
             InitTrafficSystem();
 
             /*Instantiate Game Objects */ 
-            InitRandomCars();
+         //   InitRandomCars();
 
-        }
+    /*    }
 
         private void SetPlayerProperties()
         {
@@ -60,3 +60,4 @@ using UnityEngine;
         }
 
     }
+*/

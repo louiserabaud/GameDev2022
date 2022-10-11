@@ -10,8 +10,9 @@ public class DeliveryUIManager : MonoBehaviour
         DeliverySystem.OnDeliveryRequest+=LoadNewDeliveryRequestWindow;
     }
 
-    void LoadNewDeliveryRequestWindow()
+    void LoadNewDeliveryRequestWindow(DeliveryData data)
     {
-
+        Debug.Log("delivery Generated");
+        DeliverySystem.OnAcceptDelivery?.Invoke(data);
     }
 }

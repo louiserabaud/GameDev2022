@@ -130,6 +130,15 @@ public class TrafficSystemEditorWindow : EditorWindow
         waypointCount++;
     }
 
+     void CreateCar()
+    {
+        GameObject carObject = new GameObject("Car" + waypointCount,typeof(Car));
+        Selection.activeGameObject = carObject;
+        carObject.transform.SetParent(TrafficSystem.transform.Find("Cars"),false);
+        Selection.activeGameObject = carObject;
+        carObject.tag="Car";
+    }
+
     void ExtrudeWaypoint()
     {
         Waypoint parent = Selection.activeGameObject.GetComponent<Waypoint>();
@@ -193,12 +202,12 @@ public class TrafficSystemEditorWindow : EditorWindow
 
     void AddRandomCar()
     {
-        CreateWaypoint();
+        CreateCar();
         var carObj = Selection.activeGameObject;
-        var carWaypoint = carObj.GetComponent<Waypoint>();
+        var carWaypoint = carObj.GetComponent<Car>();
         carObj.transform.SetParent(TrafficSystem.transform.Find("Cars"),false);
-        carWaypoint.tag="CarWaypoint";
-        carWaypoint.name="CarWaypoint";
+        carWaypoint.tag="Car";
+        carWaypoint.name="Car";
 
     }
 

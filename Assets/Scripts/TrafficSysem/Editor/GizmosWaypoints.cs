@@ -7,6 +7,14 @@ public static class GizmosWaypoints
 {
 
     [DrawGizmo(GizmoType.NonSelected | GizmoType.Selected | GizmoType.Pickable)]
+    public static void OnDrawSceneGizmo(Car car, GizmoType gizmoType)
+    {
+        Gizmos.DrawIcon(car.GetPosition()+new Vector3(0.0f,1f,0.0f), "carIcon.png", true);
+        DrawArrow.ForGizmo(car.GetPosition(),car.GetTransform().forward*6.0f,Color.red,2f);
+
+    }
+
+    [DrawGizmo(GizmoType.NonSelected | GizmoType.Selected | GizmoType.Pickable)]
     public static void OnDrawSceneGizmo(Waypoint waypoint, GizmoType gizmoType)
     {
         Color color = Color.blue;
@@ -33,10 +41,6 @@ public static class GizmosWaypoints
                 var p1 = waypoint.transform.position;
                 var p2 = nextpoint.transform.position;
                 var thickness = 1;
-                /*#if UNITY_EDITOR //Check if running a build or in editor
-                    Handles.DrawBezier(p1,p2,p1,p2, Color.green,null,thickness);
-                #endif*/
-                
             }
         }
     }

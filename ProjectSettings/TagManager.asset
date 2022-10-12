@@ -3,18 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Waypoint
-  - TrafficLight
-  - Intersection
-  - TrafficSystem
-  - Car
-  - CarWaypoint
-  - PlayerWaypoint
-  - Building
-  - PickupLocation
-  - DeliveryLocation
-  - Competitor
+  tags: []
   layers:
   - Default
   - TransparentFX

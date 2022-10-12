@@ -31,6 +31,21 @@ public class Node
         newNode.parent = parent;
        return newNode;
     }
+
+    public void AddChild(Node child)
+    {
+        next.Add(child);
+    }
+
+    public void Display()
+    {
+        Debug.Log("_______\n" + "Node at pos: " + position);
+        Debug.Log("Children: (" + next.Count + ")");
+        foreach(var child in next)
+            {
+                Debug.Log(child.position);
+            }
+    }
   
 
     

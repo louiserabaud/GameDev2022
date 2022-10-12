@@ -54,6 +54,7 @@ public class AIController : MonoBehaviour
 
     void Update()
     {
+       // Debug.Log(_currentTarget.position);
          UpdateSensors();
 
         if(_carController==null || _currentTarget==null)

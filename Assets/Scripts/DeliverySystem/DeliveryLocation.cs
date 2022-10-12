@@ -6,7 +6,8 @@ using System;
 public class DeliveryLocation : MonoBehaviour
 {
     public static Action<string> OnDeliver;
-    [SerializeField] private Waypoint _waypoint;
+    [SerializeField] private Waypoint _waypointA;
+    [SerializeField] private Waypoint _waypointB;
 
     public void SetTransform(Transform _transform)
     {
@@ -24,8 +25,9 @@ public class DeliveryLocation : MonoBehaviour
         return transform;
     }
 
-    public Waypoint GetClosestWaypoint()
+    public Waypoint[] GetClosestWaypoints()
     {
-        return _waypoint;
+        Waypoint[] points = {_waypointA,_waypointB};
+        return points;
     }
 }

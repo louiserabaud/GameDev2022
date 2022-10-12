@@ -8,6 +8,7 @@ using UnityEngine;
 
 public static  class Graph
 {
+    
     public static List<Node> GetNodesFromWaypoints(List<Waypoint>  _waypoints)
     {
         List<Node> _nodes= new List<Node>();
@@ -72,21 +73,34 @@ public static  class Graph
         int i = 0;
         while(currentNode.parent!=null)
         {
-           /*Debug.Log(i + " " +currentNode.position);
-           Debug.Log(i + " paRENT: " +currentNode.parent.position);*/
             //get duplicate of current node
             Node clone =  FindNodeInList(currentNode,path);
             Node parent = currentNode.parent.Duplicate();
+            path.Add(parent);
             if(clone==null)
                 {
                     clone = currentNode.Duplicate();
                     path.Add(clone);
+                    
                 }
             parent.next.Add(clone);
             clone.parent = parent;
             currentNode = currentNode.parent;
+            if(currentNode.parent==null)
+            {
+                var clone2 =  FindNodeInList(currentNode,path);
+                 if(clone==null)
+                {
+                    clone2 = currentNode.Duplicate();
+                    path.Add(clone2);
+                }
+            }
             i++;
-        }
+        };
+       // Debug.Log(i + " " +path[path.Count-1].position);
+       //  Debug.Log("----------------------");
+       //Node clone =  FindNodeInList(currentNode,path);
+       Debug.Log(path.Count);
         return path[path.Count-1];
     }
 

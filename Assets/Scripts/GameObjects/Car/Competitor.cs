@@ -22,6 +22,14 @@ public class Competitor : MonoBehaviour
 
     private void InitCarObject(Waypoint waypoint,GameObject model=null)
     {
+        var p1 = deliveryLocation.GetClosestWaypoints()[0];
+        var p2 = deliveryLocation.GetClosestWaypoints()[1];
+
+        var root1 = FindShortestPath(p1);
+        var root2 = FindShortestPath(p2);
+        Debug.Log(GetPathDistance(root1));
+        Debug.Log(GetPathDistance(root2));
+
         Debug.Log("init car");
         if(model==null)
             {
@@ -31,15 +39,28 @@ public class Competitor : MonoBehaviour
                 _car = car.GetComponent<Car>();
             }
         
-        _car.GetAIController().SetCurrentTarget(FindShortestPath());
+        
+        _car.GetAIController().SetCurrentTarget(root1);
     }
 
-    private Node FindShortestPath()
+    private float GetPathDistance(Node root)
+    {
+        float distance = 0.0f;
+        Node currentNode = root;
+        while(currentNode.next.Count>0)
+        {
+            distance+=Vector3.Distance(currentNode.position,currentNode.next[0].position);
+            currentNode = currentNode.next[0];
+        }
+        return distance;
+    }
+
+    private Node FindShortestPath(Waypoint p)
     {
         return AI.AlgorithmManager.FindShortestPath(
             AI.Algorithm.AStar,
             pickUpLocation.GetClosestWaypoint(),
-            deliveryLocation.GetClosestWaypoint(),
+            p,
             TrafficSystem.Instance.GetWaypoints()
             );
     }

@@ -23,8 +23,9 @@ public static class AStar
             node.parent=null;
         }
         
-        nodes[0].cost=0.0f;
-        openList.Add(nodes[0]);
+        Node root = FindNodeInList(start,nodes);
+        root.cost=0.0f;
+        openList.Add(root);
 
         while(openList.Count>0)
         {
@@ -50,13 +51,13 @@ public static class AStar
                 float h = Vector3.Distance(child.position, end.position);
                 float f = g + h;
 
-                if(g>child.cost && IsNodeInList(child,openList))
+                if(f>child.cost && IsNodeInList(child,openList))
                 {
                     continue;
                 }
                 else
                 {
-                    child.cost=g;
+                    child.cost=f;
                     child.parent=currentNode;
                     openList.Add(child);
                 }

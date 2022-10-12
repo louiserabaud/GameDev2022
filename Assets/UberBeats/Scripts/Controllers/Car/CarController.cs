@@ -10,125 +10,82 @@ public class CarController : MonoBehaviour
     private float steerAngle;
     private bool isBreaking;
 
-    [Header("Wheel Colliders")]
-    public List<WheelCollider> Front_Wheels; 
-    public List<WheelCollider> Back_Wheels;
-
-    [Header("Wheel Transforms")]
-    public List<Transform> Front_Wheel_Transforms; //The front wheel transforms
-    public List<Transform> Back_Wheel_Transforms; //The rear wheel transforms
-
-    [Header("Wheel Transforms Rotations")]
-    public List<Vector3> Front_Wheel_Rotation; //The front wheel rotation Vectors
-    public List<Vector3> Back_Wheel_Rotation; //The rear wheel rotation Vectors
-
+    public WheelCollider frontLeftWheelCollider;
+    public WheelCollider frontRightWheelCollider;
+    public WheelCollider rearLeftWheelCollider;
+    public WheelCollider rearRightWheelCollider;
+    public Transform frontLeftWheelTransform;
+    public Transform frontRightWheelTransform;
+    public Transform rearLeftWheelTransform;
+    public Transform rearRightWheelTransform;
 
     public float maxSteeringAngle = 30f;
-    public float motorForce = 400f;
-    public float brakeForce = 150f;
-    public float maximumSpeed=50.0f;
+    public float motorForce = 50f;
+    public float brakeForce = 0f;
+    public bool currentBrake = false;
 
-
-    private float steering;
-    private float acceleration;
-
-    public Rigidbody rb;
-    private float Brakes = 0f; //Brakes
-
-    
-
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>(); //get rigidbody
-
-    }
-
+    public float acceleration;
+    public float steering;
 
     private void FixedUpdate()
     {
-       if(GetCarSpeed()<maximumSpeed)
-            Accelerate();
-        else
-            StopAcceleration();
-        
+        GetInput();
+        HandleMotor();
+        HandleSteering();
+        UpdateWheels();
+    }
 
+    public void SetAcceleration(float acc)
+    {
+        acceleration = acc;
     }
 
     public void SetSteering(float steer)
     {
         steering = steer;
     }
-    public void SetAcceleration(float acc)
+
+    private void GetInput()
     {
-        acceleration = acc;
-    }
-    private void Accelerate()
-    {
-         foreach(WheelCollider Wheel in Back_Wheels){
-                Wheel.motorTorque = acceleration * ((motorForce * 5)/(Back_Wheels.Count + Front_Wheels.Count));
-            }
+        horizontalInput = steering;
+        verticalInput = acceleration;
+        isBreaking = currentBrake;
     }
 
-    private void Turn()
+    private void HandleSteering()
     {
-        foreach(WheelCollider Wheel in Front_Wheels){
-                Wheel.steerAngle = steering * maxSteeringAngle; //Turn the wheels
-            }
+        steerAngle = maxSteeringAngle * horizontalInput;
+        frontLeftWheelCollider.steerAngle = steerAngle;
+        frontRightWheelCollider.steerAngle = steerAngle;
     }
 
-    private void StopAcceleration()
+    private void HandleMotor()
     {
-        foreach(WheelCollider Wheel in Back_Wheels){
-                Wheel.motorTorque = 0.0f;
-            }
+        frontLeftWheelCollider.motorTorque = verticalInput * motorForce;
+        frontRightWheelCollider.motorTorque = verticalInput * motorForce;
+
+        brakeForce = isBreaking ? 3000f : 0f;
+        frontLeftWheelCollider.brakeTorque = brakeForce;
+        frontRightWheelCollider.brakeTorque = brakeForce;
+        rearLeftWheelCollider.brakeTorque = brakeForce;
+        rearRightWheelCollider.brakeTorque = brakeForce;
     }
 
-    private void RotateWheels()
+    private void UpdateWheels()
     {
-        //Rotating The Wheels Meshes so they have the same position and rotation as the wheel colliders
-        var pos = Vector3.zero; //position value (temporary)
-        var rot = Quaternion.identity; //rotation value (temporary)
-        for (int i = 0; i < (Back_Wheels.Count); i++)
-        {
-            Back_Wheels[i].GetWorldPose(out pos, out rot); //get the world rotation & position of the wheel colliders
-            Back_Wheel_Transforms[i].position = pos; //Set the wheel transform positions to the wheel collider positions
-            Back_Wheel_Transforms[i].rotation = rot * Quaternion.Euler(Back_Wheel_Rotation[i]); //Rotate the wheel transforms to the rotation of the wheel collider(s) and the rotation offset
-        }
-
-        for (int i = 0; i < (Front_Wheels.Count); i++)
-        {
-            Front_Wheels[i].GetWorldPose(out pos, out rot); //get the world rotation & position of the wheel colliders
-            Front_Wheel_Transforms[i].position = pos; //Set the wheel transform positions to the wheel collider positions
-            Front_Wheel_Transforms[i].rotation = rot * Quaternion.Euler(Front_Wheel_Rotation[i]); //Rotate the wheel transforms to the rotation of the wheel collider(s) and the rotation offset
-        }
-
+        UpdateWheelPos(frontLeftWheelCollider, frontLeftWheelTransform);
+        UpdateWheelPos(frontRightWheelCollider, frontRightWheelTransform);
+        UpdateWheelPos(rearLeftWheelCollider, rearLeftWheelTransform);
+        UpdateWheelPos(rearRightWheelCollider, rearRightWheelTransform);
     }
 
-    public void ApplyBrake()
+    private void UpdateWheelPos(WheelCollider wheelCollider, Transform trans)
     {
-         foreach(WheelCollider Wheel in Front_Wheels){
-            Wheel.brakeTorque = Brakes; //set the brake torque of the wheels to the brake torque
-        }
-
-        foreach(WheelCollider Wheel in Back_Wheels){
-            Wheel.brakeTorque = Brakes; //set the brake torque of the wheels to the brake torque
-        }
+        Vector3 pos;
+        Quaternion rot;
+        wheelCollider.GetWorldPose(out pos, out rot);
+        trans.rotation = rot;
+        trans.position = pos;
     }
-    public void Brake(bool isBreaking)
-    {
-        if(!isBreaking)
-            return;
-        Brakes = brakeForce;
-
-    }
-
-   
-
-    public float GetCarSpeed()
-    {
-        return rb.velocity.magnitude * 3.6f;
-    }
-
-
 
 }

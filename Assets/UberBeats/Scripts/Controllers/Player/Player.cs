@@ -20,6 +20,12 @@ public class Player : MonoBehaviour
         SetMainCameraTarget();
     }
 
+    void FixedUpdate()
+    {
+        _carController.SetAcceleration(Input.GetAxis("Vertical"));
+        _carController.SetSteering(Input.GetAxis("Horizontal"));
+    }
+
     private void SetMainCameraTarget()
     {
         GameObject.FindWithTag("MainCamera").GetComponent<Camera>().GetComponent<CameraController>().SetCameraTarget(cameraTarget);
@@ -33,5 +39,14 @@ public class Player : MonoBehaviour
     public Transform GetTransform()
     {
         return transform;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            Debug.Log(collision.gameObject.name);
+            Debug.DrawRay(contact.point, contact.normal, Color.white);
+        }
     }
 }

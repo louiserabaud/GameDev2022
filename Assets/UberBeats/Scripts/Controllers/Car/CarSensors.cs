@@ -6,8 +6,9 @@ using UnityEngine;
 public class CarSensors : MonoBehaviour
 {
     public Transform FrontCenter;
-    public Transform FrontRight;
-    public Transform FrontLeft;
-    public Transform Back;
+
+    
+
+    
 
 }

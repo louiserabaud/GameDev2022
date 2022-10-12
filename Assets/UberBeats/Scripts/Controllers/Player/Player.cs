@@ -20,10 +20,11 @@ public class Player : MonoBehaviour
         SetMainCameraTarget();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         _carController.SetAcceleration(Input.GetAxis("Vertical"));
         _carController.SetSteering(Input.GetAxis("Horizontal"));
+         _carController.Brake(Input.GetKey(KeyCode.Space));
     }
 
     private void SetMainCameraTarget()

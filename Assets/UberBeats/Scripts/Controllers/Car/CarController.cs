@@ -19,10 +19,10 @@ public class CarController : MonoBehaviour
     public Transform rearLeftWheelTransform;
     public Transform rearRightWheelTransform;
 
-    public float maxSteeringAngle = 30f;
-    public float motorForce = 50f;
-    public float brakeForce = 0f;
-    public bool currentBrake = false;
+    private float maxSteeringAngle = 30f;
+    private float motorForce = 1500f;
+    private float brakeForce = 1000f;
+   
 
     public float acceleration;
     public float steering;
@@ -49,7 +49,11 @@ public class CarController : MonoBehaviour
     {
         horizontalInput = steering;
         verticalInput = acceleration;
-        isBreaking = currentBrake;
+    }
+
+    public void Brake(bool shouldBreak)
+    {
+        isBreaking = shouldBreak;
     }
 
     private void HandleSteering()

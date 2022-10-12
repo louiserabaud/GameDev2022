@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - TrafficLight
+  - PickupLocation
+  - Intersection
+  - TrafficSystem
+  - DeliveryLocation
+  - Waypoint
   layers:
   - Default
   - TransparentFX

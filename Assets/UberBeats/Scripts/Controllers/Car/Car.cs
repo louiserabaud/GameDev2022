@@ -9,7 +9,7 @@ public class Car : MonoBehaviour
 
     void Awake()
     {
-        _carController = PrefabLoader.Instance.LoadCar(
+        _carController = PrefabManager.Instance.LoadCar(
             AssetDatabase.Cars.Get("Jeep5"),
             transform
         );

@@ -36,8 +36,8 @@ public class DeliverySystem : MonoBehaviour
         var random_pickUp = _pickupLocations[Random.Range(0,(_pickupLocations.Count)-1)];
         var random_delivery = _deliveryLocations[Random.Range(0,(_deliveryLocations.Count)-1)];
         DeliveryData newDelivery = new DeliveryData(random_pickUp,random_delivery);
-        OnDeliveryRequest?.Invoke(newDelivery);
-        OnAcceptDelivery?.Invoke(newDelivery);
+        EventManager.TriggerEvent("OnNewDeliveryRequest");
+        Debug.Log("new delivery");
     }
 
     private void GatherGameObjects()

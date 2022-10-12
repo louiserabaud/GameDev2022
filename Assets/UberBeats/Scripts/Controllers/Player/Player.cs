@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        _carController = PrefabLoader.Instance.LoadCar(
+        _carController = PrefabManager.Instance.LoadCar(
             AssetDatabase.Cars.Get("Jeep5"),
             transform,
             "Player"

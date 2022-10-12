@@ -4,12 +4,11 @@ using UnityEngine;
 using System.Linq;
 using System;
 
-
+[RequireComponent(typeof(StateMachine))]
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public StateMachine stateMachine => GetComponent<StateMachine>();
     private void Awake() 
     { 
         if (Instance != null && Instance != this) 

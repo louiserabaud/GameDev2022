@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class StateMachine: MonoBehaviour
 {
-    private Dictionary<Type,BaseState> _concreteStates;
+    private Dictionary<Type,BaseState> _concreteStates=null;
 
     public BaseState currentState {get; private set;}
 
@@ -18,12 +18,15 @@ public class StateMachine: MonoBehaviour
 
     public void Update()
     {
-        Debug.Log("fsm");
+        if(_concreteStates==null)
+            return;
         if(currentState==null)
         {
             currentState = _concreteStates.Values.First();
             currentState.OnEnter();
         }
+
+        currentState.OnTick();
     }
 
     public void SwitchState(BaseState newState)

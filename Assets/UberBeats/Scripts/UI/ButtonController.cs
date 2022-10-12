@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public enum ButtonType
 {
+    PLAY_BUTTON,
     ACCEPT_DELIVERY,
     DECLINE_DELIVERY,
     PICKUP_DELIVERY
@@ -27,6 +28,10 @@ public class ButtonController : MonoBehaviour
     {
         switch (buttonType)
         {
+            case ButtonType.PLAY_BUTTON:
+                //Call other code that is necessary to start the game like levelManager.StartGame()
+                canvasManager.SwitchCanvas(CanvasType.DrivingScreen);
+                break;
             case ButtonType.DECLINE_DELIVERY:
                 //Call other code that is necessary to start the game like levelManager.StartGame()
                 EventManager.TriggerEvent("OnDeclineDelivery");

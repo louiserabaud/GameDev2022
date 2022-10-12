@@ -29,7 +29,7 @@ public class CanvasManager : Singleton<CanvasManager>
         canvasControllerList = GetComponentsInChildren<CanvasController>().ToList();
         Debug.Log(canvasControllerList.Count);
         canvasControllerList.ForEach(x => x.gameObject.SetActive(false));
-        SwitchCanvas(CanvasType.Empty);
+        SwitchCanvas(CanvasType.MainMenu);
         ListenToEvents();
     }
 

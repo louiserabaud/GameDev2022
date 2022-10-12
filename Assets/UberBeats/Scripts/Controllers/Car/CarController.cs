@@ -46,7 +46,12 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-       
+       if(GetCarSpeed()<maximumSpeed)
+            Accelerate();
+        else
+            StopAcceleration();
+        
+
     }
 
     public void SetSteering(float steer)

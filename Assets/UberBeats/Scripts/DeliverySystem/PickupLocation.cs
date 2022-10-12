@@ -8,6 +8,14 @@ public class PickupLocation : MonoBehaviour
     public static Action OnPickup;
     [SerializeField] private Waypoint _waypoint;
 
+
+    public bool isWaitingForPickup=false;
+
+    private void Start()
+    {
+        EventManager.StartListening("OnAcceptDelivery",SetDataForPickup);
+    }
+
     public void SetTransform(Transform _transform)
     {
         transform.position = _transform.position;
@@ -27,5 +35,24 @@ public class PickupLocation : MonoBehaviour
     public Waypoint GetClosestWaypoint()
     {
         return _waypoint;
+    }
+
+    private void SetDataForPickup()
+    {
+        isWaitingForPickup=true;
+    }
+
+    void OnTriggerEnter(Collider otherObject){
+        if(otherObject.GetComponent<Collider>().tag=="Player" && isWaitingForPickup)
+            {
+                EventManager.TriggerEvent("OnPlayerPickUp");
+                isWaitingForPickup=false;
+            }
+            
+    }
+
+    void OnCollisionExit(Collision otherObject){
+        if(otherObject.collider.GetComponent<Collider>().tag=="Player")
+            EventManager.TriggerEvent("OnCompetitionStarted");
     }
 }

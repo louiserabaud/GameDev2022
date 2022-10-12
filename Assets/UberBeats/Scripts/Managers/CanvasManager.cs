@@ -9,7 +9,7 @@ public enum CanvasType
     MainMenu,
     DrivingScreen,
     BeforePickupScreen,
-    AfterPickupScreen,
+    PickupScreen,
     DeliveryRequest,
     WinScreen,
     LooseScreen,
@@ -38,6 +38,9 @@ public class CanvasManager : Singleton<CanvasManager>
         EventManager.StartListening(
             "OnNewDeliveryRequest",
             SetNewDeliveryRequest);
+        EventManager.StartListening(
+            "OnPlayerPickUp",
+            OnPlayerPickupDelivery);
     }
 
     public void SwitchCanvas(CanvasType _type)
@@ -59,7 +62,11 @@ public class CanvasManager : Singleton<CanvasManager>
 
     public void SetNewDeliveryRequest()
     {
-        Debug.Log("emitter received");
         SwitchCanvas(CanvasType.DeliveryRequest);
+    }
+
+    public void OnPlayerPickupDelivery()
+    {
+        SwitchCanvas(CanvasType.PickupScreen);
     }
  }

@@ -15,6 +15,8 @@ public class DeliverySystem : MonoBehaviour
 
     [SerializeField] private bool isRunning = false;
 
+    DeliveryData currentDelivery=null;
+
     private void Awake() 
     { 
         if (Instance != null && Instance != this) 
@@ -28,6 +30,12 @@ public class DeliverySystem : MonoBehaviour
         GatherGameObjects();
     }
 
+    public void SetupListeners()
+    {
+         EventManager.StartListening("OnDeclineDelivery",HandleDeclinedDelivery);
+         EventManager.StartListening("OnCompetitionStarted",SendCompetitor);
+    }
+
 
     public void RequestNewDelivery()
     {
@@ -35,7 +43,7 @@ public class DeliverySystem : MonoBehaviour
             return;
         var random_pickUp = _pickupLocations[Random.Range(0,(_pickupLocations.Count)-1)];
         var random_delivery = _deliveryLocations[Random.Range(0,(_deliveryLocations.Count)-1)];
-        DeliveryData newDelivery = new DeliveryData(random_pickUp,random_delivery);
+        currentDelivery = new DeliveryData(random_pickUp,random_delivery);
         EventManager.TriggerEvent("OnNewDeliveryRequest");
         Debug.Log("new delivery");
     }
@@ -60,6 +68,16 @@ public class DeliverySystem : MonoBehaviour
     private void SetDeliveryLocations(List<PickupLocation> _locations)
     {
         _pickupLocations = _locations;
+    }
+
+    private void HandleDeclinedDelivery()
+    {
+        currentDelivery = null;
+    }
+
+    private void SendCompetitor()
+    {
+
     }
 
 }

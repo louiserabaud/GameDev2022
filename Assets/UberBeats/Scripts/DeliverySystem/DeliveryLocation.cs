@@ -30,4 +30,6 @@ public class DeliveryLocation : MonoBehaviour
         Waypoint[] points = {_waypointA,_waypointB};
         return points;
     }
+
+    
 }
